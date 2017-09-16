@@ -141,7 +141,14 @@
 					"branch": "v4.6.4",
 					"commit": "82c7bc82aa1ff5110b3f8dd8a0a31581a1fb085c",
 					"dest": "libdivecomputer"
-				}
+				},
+				{
+					"type":"git",
+					"url":"https://github.com/Subsurface-divelog/marble.git",
+					"branch": "v4.6.4",
+					"commit": "df3576addbb71e03aa6dcbae6779c1943927823a",
+					"dest": "marble-source"
+  				}
 			],
 			"build-commands":
 			[
