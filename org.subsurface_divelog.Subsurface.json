@@ -12,7 +12,6 @@
 		"--socket=wayland",
 		"--socket=x11",
 		"--share=network",
-		"--device=dri",
 		"--filesystem=home",
 		"--device=all",
 		"--env=QTWEBENGINE_DISABLE_SANDBOX=1",
@@ -96,11 +95,12 @@
 				sed -i \"s|(INSTALL_ROOT)/usr|//app|\" Makefile && \\
 				sed -i 's/std=c++1z/std=c++11/g ; s/-Wdate-time//' Makefile && \\
 				make -j4 && \\
-				make install"		
+				make install"
 			]
 		},
 		{
 			"name": "qtwebkit",
+			"buildsystem": "simple",
 			"cleanup-platform": [
 				"/bin",
 				"/mkspecs"
@@ -111,12 +111,10 @@
 					"url": "git://github.com/qt/qtwebkit",
 					"branch": "v5.212.0-alpha2",
 					"commit": "aab669a05f943c587f6acccd94d53a8544170c1c"
-				},
-				{
-					"type": "script",
-					"commands": [ "qmake" ],
-					"dest-filename": "configure"
 				}
+			],
+			"build-commands": [
+				"perl Tools/Scripts/build-webkit --release --qt --install-libs=/app/lib --install-headers=/app/include"
 			]
 		},
 		{
