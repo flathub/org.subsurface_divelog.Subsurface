@@ -124,8 +124,7 @@
 				{
 					"type":"git",
 					"url": "https://github.com/Subsurface-divelog/subsurface.git",
-					"branch": "v4.6.4",
-					"commit": "92e6cdf3e89f711672a86068eeaa486fe84ef952",
+					"commit": "58b7c6f8ef703009e098351774b8db521cce48e3",
 					"dest": "subsurface"
 				},
 				{
@@ -141,14 +140,7 @@
 					"branch": "v4.6.4",
 					"commit": "82c7bc82aa1ff5110b3f8dd8a0a31581a1fb085c",
 					"dest": "libdivecomputer"
-				},
-				{
-					"type":"git",
-					"url":"https://github.com/Subsurface-divelog/marble.git",
-					"branch": "v4.6.4",
-					"commit": "df3576addbb71e03aa6dcbae6779c1943927823a",
-					"dest": "marble-source"
-  				}
+				}
 			],
 			"build-commands":
 			[
