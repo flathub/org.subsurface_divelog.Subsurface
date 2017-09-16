@@ -15,7 +15,8 @@
 		"--device=dri",
 		"--filesystem=home",
 		"--device=all",
-		"--env=QTWEBENGINE_DISABLE_SANDBOX=1"
+		"--env=QTWEBENGINE_DISABLE_SANDBOX=1",
+		"--env=QT_QPA_PLATFORM=flatpak"
 	],
 	"build-options": {
 		"cflags": "-O2",
@@ -84,7 +85,8 @@
 			"sources":[
 				{
 					"type":"git",
-					"url":"https://github.com/Subsurface-divelog/googlemaps.git"
+					"url":"https://github.com/Subsurface-divelog/googlemaps.git",
+					"commit": "e6b44ec91c2c7275142bb6b8afa90a3c6c76fd13"
 				}
 			],
 			"build-commands": [
@@ -94,7 +96,27 @@
 				sed -i \"s|(INSTALL_ROOT)/usr|//app|\" Makefile && \\
 				sed -i 's/std=c++1z/std=c++11/g ; s/-Wdate-time//' Makefile && \\
 				make -j4 && \\
-				make install"
+				make install"		
+			]
+		},
+		{
+			"name": "qtwebkit",
+			"cleanup-platform": [
+				"/bin",
+				"/mkspecs"
+			],
+			"sources": [
+				{
+					"type": "git",
+					"url": "git://github.com/qt/qtwebkit",
+					"branch": "v5.212.0-alpha2",
+					"commit": "aab669a05f943c587f6acccd94d53a8544170c1c"
+				},
+				{
+					"type": "script",
+					"commands": [ "qmake" ],
+					"dest-filename": "configure"
+				}
 			]
 		},
 		{
@@ -104,7 +126,8 @@
 				{
 					"type":"git",
 					"url": "https://github.com/Subsurface-divelog/subsurface.git",
-					"commit": "58b7c6f8ef703009e098351774b8db521cce48e3",
+					"branch": "v4.6.4",
+					"commit": "92e6cdf3e89f711672a86068eeaa486fe84ef952",
 					"dest": "subsurface"
 				},
 				{
