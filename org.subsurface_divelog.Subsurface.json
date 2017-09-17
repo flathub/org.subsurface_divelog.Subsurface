@@ -57,8 +57,8 @@
 				{
 					"type":"git",
 					"url":"https://github.com/steveire/grantlee.git",
-					"branch": "v5.1.0",
-					"commit": "8f66fa86a24775e245df560771f313fa59770096"
+					"branch": "v5.0.0",
+					"commit": "95d97170028caf7b1c262ceb433ad31554abe12e"
 				}
 			]
 		},
@@ -148,6 +148,7 @@
 				"sed -i -e 's|SUBSURFACE_EXECUTABLE=MobileExecutable|SUBSURFACE_EXECUTABLE=DesktopExecutable|g' ./subsurface/scripts/build.sh",
 				"sed -i \"s,INSTALL_ROOT=.*,INSTALL_ROOT=/app,\" ./subsurface/scripts/build.sh",
 				"sed -i \"s,cmake -DCMAKE_BUILD_TYPE=Debug.*,cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .. \\\\\\\\,\" ./subsurface/scripts/build.sh",
+				"sed -i \"s,\$PRINTING \$EXTRA_OPTS,-DNO_PRINTING=OFF \$EXTRA_OPTS,\" ./subsurface/scripts/build.sh",
 				"./subsurface/scripts/build.sh",
 				"cd subsurface/build && make install"
 			]
