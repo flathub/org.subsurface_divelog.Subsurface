@@ -70,18 +70,6 @@
 			]
 		},
 		{
-			"name":"grantlee",
-			"buildsystem":"cmake",
-			"sources":[
-				{
-					"type":"git",
-					"url":"https://github.com/steveire/grantlee.git",
-					"branch": "v5.1.0",
-					"commit": "8f66fa86a24775e245df560771f313fa59770096"
-				}
-			]
-		},
-		{
 			"name":"libzip",
 			"sources":[
 				{
@@ -140,6 +128,13 @@
 					"branch": "v4.6.4",
 					"commit": "82c7bc82aa1ff5110b3f8dd8a0a31581a1fb085c",
 					"dest": "libdivecomputer"
+				},
+				{
+					"type":"git",
+					"url":"https://github.com/steveire/grantlee.git",
+					"branch": "v5.1.0",
+					"commit": "8f66fa86a24775e245df560771f313fa59770096",
+					"dest": "grantlee"
 				}
 			],
 			"build-commands":
