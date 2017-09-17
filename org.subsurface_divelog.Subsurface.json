@@ -145,11 +145,10 @@
 			"build-commands":
 			[
 				"mkdir -p /app/share/metainfo && cp ./subsurface/appdata/subsurface.appdata.xml /app/share/metainfo",
-				"sed -i -e 's|SUBSURFACE_EXECUTABLE=MobileExecutable|SUBSURFACE_EXECUTABLE=DesktopExecutable|g' ./subsurface/scripts/build.sh",
 				"sed -i \"s,INSTALL_ROOT=.*,INSTALL_ROOT=/app,\" ./subsurface/scripts/build.sh",
 				"sed -i \"s,cmake -DCMAKE_BUILD_TYPE=Debug.*,cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .. \\\\\\\\,\" ./subsurface/scripts/build.sh",
 				"sed -i \"s,\$PRINTING \$EXTRA_OPTS,-DNO_PRINTING=OFF \$EXTRA_OPTS,\" ./subsurface/scripts/build.sh",
-				"./subsurface/scripts/build.sh",
+				"./subsurface/scripts/build.sh -build-with-webkit -desktop",
 				"cd subsurface/build && make install"
 			]
 		}
