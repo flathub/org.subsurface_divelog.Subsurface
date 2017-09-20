@@ -35,22 +35,24 @@
 	"modules":[
 		{
 			"name": "qtwebkit",
+			"buildsystem": "simple",
 			"cleanup-platform": [
 				"/bin",
 				"/mkspecs"
 			],
 			"sources": [
 				{
-					"type": "git",
-					"url": "git://github.com/qt/qtwebkit",
-					"branch": "v5.212.0-alpha2",
-					"commit": "aab669a05f943c587f6acccd94d53a8544170c1c"
-				 },
-                {
-                    "type": "script",
-                    "commands": [ "qmake" ],
-                    "dest-filename": "configure"
-                }
+					"type": "archive",
+					"url": "https://github.com/qt/qtwebkit/archive/v5.212.0-alpha2.tar.gz",
+					"sha256": "6db43b931f64857cfda7bcf89914e2730b82164871a8c24c1881620e6bfdeca1"
+				}
+			],
+			"build-commands": [
+				"qmake",
+				"grep -rl '/usr/local' . | xargs sed -i 's|/usr/local|/app|g'",
+				"make",
+				"find . -name \"cmake_install.cmake\" | xargs sed -i 's|/usr|/app|g'",
+				"make install"
 			]
 		},
 		"shared-modules/udev/udev-175.json",
@@ -143,7 +145,7 @@
 				"mkdir -p /app/share/metainfo && cp ./subsurface/appdata/subsurface.appdata.xml /app/share/metainfo",
 				"sed -i \"s,INSTALL_ROOT=.*,INSTALL_ROOT=/app,\" ./subsurface/scripts/build.sh",
 				"sed -i \"s,cmake -DCMAKE_BUILD_TYPE=Debug.*,cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .. \\\\\\\\,\" ./subsurface/scripts/build.sh",
-				"sed -i \"s,\\\$PRINTING \\\$EXTRA_OPTS,-DNO_PRINTING=OFF \\\$EXTRA_OPTS,\" ./subsurface/scripts/build.sh",
+				"sed -i \"s,\\\$PRINTING \\\$EXTRA_OPTS,-DNO_PRINTING=OFF \\\$EXTRA_OPTS -DCMAKE_PREFIX_PATH=/app,\" ./subsurface/scripts/build.sh",
 				"./subsurface/scripts/build.sh -build-with-webkit -desktop",
 				"cd subsurface/build && make install"
 			]
