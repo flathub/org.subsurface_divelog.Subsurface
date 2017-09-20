@@ -89,6 +89,21 @@
 			]
 		},
 		{
+			"name": "libdivecomputer",
+			"sources": [
+				{
+					"type":"git",
+					"url":"https://github.com/Subsurface-divelog/libdc.git",
+					"branch": "Subsurface-branch",
+					"commit": "c0f025b01920e5189a1e527a1ff995ca10c18d0e"
+				},
+				{
+					"type": "shell",
+					"commands": ["autoreconf --install", "autoreconf --install"]
+				}
+			]
+		},
+		{
 			"name":"googlemaps",
 			"buildsystem": "simple",
 			"sources":[
@@ -109,45 +124,69 @@
 			]
 		},
 		{
-			"name": "subsurface",
-			"buildsystem":"simple",
+			"name":"grantlee",
+			"buildsystem": "cmake",
+			"config-opts": [
+				"-DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include",
+				"-DCMAKE_INSTALL_LIBDIR:PATH=/app/lib",
+				"-DCMAKE_BUILD_TYPE=Release",
+				"-DCMAKE_INSTALL_PREFIX=/app",
+				"-DBUILD__TESTS=NO"
+			],
 			"sources":[
-				{
-					"type":"git",
-					"url": "https://github.com/Subsurface-divelog/subsurface.git",
-					"commit": "58b7c6f8ef703009e098351774b8db521cce48e3",
-					"dest": "subsurface"
-				},
-				{
-					"type":"git",
-					"url":"https://github.com/libgit2/libgit2.git",
-					"branch": "v0.26.0",
-					"commit": "15e119375018fba121cf58e02a9f17fe22df0df8",
-					"dest": "libgit2"
-				},
-				{
-					"type":"git",
-					"url":"https://github.com/Subsurface-divelog/libdc.git",
-					"branch": "v4.6.4",
-					"commit": "82c7bc82aa1ff5110b3f8dd8a0a31581a1fb085c",
-					"dest": "libdivecomputer"
-				},
 				{
 					"type":"git",
 					"url":"https://github.com/steveire/grantlee.git",
 					"branch": "v5.1.0",
-					"commit": "8f66fa86a24775e245df560771f313fa59770096",
-					"dest": "grantlee"
+					"commit": "fe3b1fc49252af2f952c3247af212d4984d84a06"
 				}
+			]
+		},
+		{
+			"name":"libgit",
+			"buildsystem": "cmake",
+			"config-opts": [
+				"-DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include",
+				"-DCMAKE_INSTALL_LIBDIR:PATH=/app/lib",
+				"-DCMAKE_BUILD_TYPE=Release",
+				"-DCMAKE_INSTALL_PREFIX=/app",
+				"-DBUILD_CLAR=OFF"
 			],
-			"build-commands":
-			[
-				"mkdir -p /app/share/metainfo && cp ./subsurface/appdata/subsurface.appdata.xml /app/share/metainfo",
-				"sed -i \"s,INSTALL_ROOT=.*,INSTALL_ROOT=/app,\" ./subsurface/scripts/build.sh",
-				"sed -i \"s,cmake -DCMAKE_BUILD_TYPE=Debug.*,cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .. \\\\\\\\,\" ./subsurface/scripts/build.sh",
-				"sed -i \"s,\\\$PRINTING \\\$EXTRA_OPTS,-DNO_PRINTING=OFF \\\$EXTRA_OPTS -DCMAKE_PREFIX_PATH=/app,\" ./subsurface/scripts/build.sh",
-				"./subsurface/scripts/build.sh -build-with-webkit -desktop",
-				"cd subsurface/build && make install"
+			"sources":[
+				{
+					"type":"git",
+					"url":"https://github.com/libgit2/libgit2.git",
+					"branch": "v0.26.0",
+					"commit": "15e119375018fba121cf58e02a9f17fe22df0df8"
+				}
+			]
+		},
+		{
+			"name": "subsurface",
+			"buildsystem": "cmake",
+			"builddir": true,
+			"config-opts": [
+				"-DCMAKE_BUILD_TYPE=Release",
+				"-DSUBSURFACE_TARGET_EXECUTABLE=DesktopExecutable",
+				"-DLIBDIVECOMPUTER_INCLUDE_DIR=/app/include",
+				"-DLIBDIVECOMPUTER_LIBRARIES=/app/lib/libdivecomputer.a",
+				"-DCMAKE_PREFIX_PATH=/app",
+				"-DNO_PRINTING=OFF",
+				"-DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets"
+			],
+			"make-args": ["LIBRARY_PATH=/app/lib"],
+			"sources":[
+				{
+					"type":"git",
+					"url": "https://github.com/Subsurface-divelog/subsurface.git"
+				},
+				{
+					"type": "shell",
+					"commands": [
+						"mkdir -p /app/share/metainfo",
+						"cp ./appdata/subsurface.appdata.xml /app/share/metainfo"
+					]
+				}
 			]
 		}
 	]
