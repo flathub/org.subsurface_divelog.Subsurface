@@ -71,37 +71,6 @@
 			]
 		},
 		{
-			"name": "bluez",
-			"config-opts": [ "--disable-datafiles", "--disable-systemd", "--enable-library", "--prefix=/app", "--sysconfdir=/app/etc" ],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://www.kernel.org/pub/linux/bluetooth/bluez-5.47.tar.xz",
-					"sha256": "cf75bf7cd5d564f21cc4a2bd01d5c39ce425397335fd47d9bbe43af0a58342c8"
-				},
-				{
-				  "type": "shell",
-				  "commands": ["sed -i \"s|\\${exec_prefix}|/app|g\" /app/share/pkgconfig/udev.pc"]
-				}
-			]
-		},
-				{
-			"name": "qt5-connectivity",
-			"cleanup-platform": [ "/bin", "/mkspecs" ],
-			"sources": [
-				{
-					"type": "git",
-					"url": "git://code.qt.io/qt/qtconnectivity.git",
-					"branch": "v5.9.1"
-				},
-				{
-					"type": "script",
-					"commands": [ "qmake" ],
-					"dest-filename": "configure"
-				}
-			]
-		},
-		{
 			"name":"libssh2",
 			"buildsystem":"cmake",
 			"config-opts":[
@@ -204,6 +173,42 @@
 					"branch": "v0.26.0",
 					"commit": "15e119375018fba121cf58e02a9f17fe22df0df8"
 				}
+			]
+		},
+        {
+			"name": "bluez2",
+			"config-opts": [ "--disable-datafiles", "--disable-systemd", "--enable-library", "--prefix=/app", "--sysconfdir=/app/etc" ],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://www.kernel.org/pub/linux/bluetooth/bluez-5.47.tar.xz",
+					"sha256": "cf75bf7cd5d564f21cc4a2bd01d5c39ce425397335fd47d9bbe43af0a58342c8"
+				},
+				{
+				  "type": "shell",
+				  "commands": ["sed -i \"s|\\${exec_prefix}|/app|g\" /app/share/pkgconfig/udev.pc"]
+				}
+			]
+		},
+        {
+			"name": "qt5-connectivity4",
+			"buildsystem": "simple",
+			"cleanup-platform": [ "/bin", "/mkspecs" ],
+			"sources": [
+				{
+					"type": "git",
+					"url": "git://code.qt.io/qt/qtconnectivity.git",
+					"branch": "v5.9.1"
+				}
+			],
+			"build-commands": [
+					"qmake",
+					"make",
+					"cp -r -n bin /app",
+					"cp -r -n include /app",
+					"cp -r -n lib /app",
+					"mkdir -p /app/src/bluetooth",
+					"cp -r src/bluetooth /app/src/"
 			]
 		},
 		{
