@@ -9,13 +9,11 @@
 	"rename-desktop-file": "subsurface.desktop",
 	"desktop-file-name-suffix": "-test",
 	"finish-args":[
-		"--socket=wayland",
 		"--socket=x11",
 		"--share=network",
 		"--filesystem=home",
 		"--device=all",
-		"--env=QTWEBENGINE_DISABLE_SANDBOX=1",
-		"--env=QT_QPA_PLATFORM=flatpak"
+		"--env=QTWEBENGINE_DISABLE_SANDBOX=1"
 	],
 	"build-options": {
 		"cflags": "-O2",
