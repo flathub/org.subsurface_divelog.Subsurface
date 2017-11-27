@@ -77,10 +77,9 @@
 			],
 			"sources":[
 				{
-					"type":"git",
-					"url":"https://github.com/libssh2/libssh2.git",
-					"branch": "libssh2-1.8.0",
-					"commit": "72274af7f901315c1d47e43620c5bcb5f40c2b20"
+					"type":"archive",
+					"url":"https://github.com/libssh2/libssh2/archive/libssh2-1.8.0.tar.gz",
+					"sha256": "973f63f98141d68b4a1bc85791ee29411eeab12a6230ae1aca9c368550ccafae"
 				}
 			]
 		},
@@ -88,10 +87,9 @@
 			"name":"libzip",
 			"sources":[
 				{
-					"type":"git",
-					"url":"https://github.com/nih-at/libzip.git",
-					"branch": "rel-1-2-0",
-					"commit": "a23ac8a766c556827255111eb35ba928641efbc8"
+					"type":"archive",
+					"url":"https://github.com/nih-at/libzip/archive/rel-1-3-2.tar.gz",
+					"sha256": "c900c570bcf3e33c6dfa8c1545e5e4d51a5d8f32bb252d4003cc8bab3df09718"
 				},
 				{
 					"type":"script",
@@ -104,10 +102,9 @@
 			"name": "libdivecomputer",
 			"sources": [
 				{
-					"type":"git",
-					"url":"https://github.com/Subsurface-divelog/libdc.git",
-					"branch": "Subsurface-branch",
-					"commit": "c0f025b01920e5189a1e527a1ff995ca10c18d0e"
+					"type":"archive",
+					"url":"https://github.com/Subsurface-divelog/libdc/archive/v4.7.4.tar.gz",
+					"sha256": "e9cda16de168b2f38436f3a791c947ef2e7436abb00c9125c37049e796835ce6"
 				},
 				{
 					"type": "shell",
@@ -121,8 +118,7 @@
 			"sources":[
 				{
 					"type":"git",
-					"url":"https://github.com/Subsurface-divelog/googlemaps.git",
-					"commit": "e6b44ec91c2c7275142bb6b8afa90a3c6c76fd13"
+					"url":"https://github.com/Subsurface-divelog/googlemaps.git"
 				}
 			],
 			"build-commands": [
@@ -147,10 +143,9 @@
 			],
 			"sources":[
 				{
-					"type":"git",
-					"url":"https://github.com/steveire/grantlee.git",
-					"branch": "v5.1.0",
-					"commit": "fe3b1fc49252af2f952c3247af212d4984d84a06"
+					"type":"archive",
+					"url":"https://github.com/steveire/grantlee/archive/v5.1.0.tar.gz",
+					"sha256": "3836572fe5e49d28a1d99186c6d96f88ff839644b4bc77b73b6d8208f6ccc9d1"
 				}
 			]
 		},
@@ -166,10 +161,9 @@
 			],
 			"sources":[
 				{
-					"type":"git",
-					"url":"https://github.com/libgit2/libgit2.git",
-					"branch": "v0.26.0",
-					"commit": "15e119375018fba121cf58e02a9f17fe22df0df8"
+					"type":"archive",
+					"url":"https://github.com/libgit2/libgit2/archive/v0.26.0.tar.gz",
+					"sha256": "6a62393e0ceb37d02fe0d5707713f504e7acac9006ef33da1e88960bd78b6eac"
 				}
 			]
 		},
@@ -225,8 +219,9 @@
 			"make-args": ["LIBRARY_PATH=/app/lib"],
 			"sources":[
 				{
-					"type":"git",
-					"url": "https://github.com/Subsurface-divelog/subsurface.git"
+					"type":"archive",
+					"url": "https://github.com/Subsurface-divelog/subsurface/archive/v4.7.4.tar.gz",
+					"sha256": "09a9150263e0411ca70c60794ef6f00a1e2eaffedf61744de2e0eff961e30275"
 				},
 				{
 					"type": "shell",
