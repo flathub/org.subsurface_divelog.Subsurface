@@ -167,7 +167,7 @@
 				}
 			]
 		},
-        {
+		{
 			"name": "bluez",
 			"config-opts": [ "--disable-datafiles", "--disable-systemd", "--enable-library", "--prefix=/app", "--sysconfdir=/app/etc" ],
 			"sources": [
@@ -182,7 +182,7 @@
 				}
 			]
 		},
-        {
+		{
 			"name": "qt5-connectivity",
 			"buildsystem": "simple",
 			"cleanup-platform": [ "/bin", "/mkspecs" ],
