@@ -12,6 +12,7 @@
 		"--share=network",
 		"--filesystem=home",
 		"--device=all",
+		"--system-talk-name=org.bluez",
 		"--env=QTWEBENGINE_DISABLE_SANDBOX=1"
 	],
 	"build-options": {
