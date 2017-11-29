@@ -7,7 +7,6 @@
 	"rename-icon": "subsurface-icon",
 	"rename-appdata-file": "subsurface.appdata.xml",
 	"rename-desktop-file": "subsurface.desktop",
-	"desktop-file-name-suffix": "-test",
 	"finish-args":[
 		"--socket=x11",
 		"--share=network",
@@ -168,7 +167,7 @@
 			]
 		},
         {
-			"name": "bluez2",
+			"name": "bluez",
 			"config-opts": [ "--disable-datafiles", "--disable-systemd", "--enable-library", "--prefix=/app", "--sysconfdir=/app/etc" ],
 			"sources": [
 				{
@@ -183,7 +182,7 @@
 			]
 		},
         {
-			"name": "qt5-connectivity4",
+			"name": "qt5-connectivity",
 			"buildsystem": "simple",
 			"cleanup-platform": [ "/bin", "/mkspecs" ],
 			"sources": [
