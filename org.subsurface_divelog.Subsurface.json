@@ -237,8 +237,8 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url": "https://github.com/Subsurface-divelog/subsurface/archive/v4.7.6.tar.gz",
-					"sha256": "48d5646567759de6f3f3c810457003b919c14f96311b0dfd8a7489eea134d8d9"
+					"url": "https://github.com/Subsurface-divelog/subsurface/archive/v4.7.7.tar.gz",
+					"sha256": "125d8a538d3be1523d9c69eba47aece1a303c592bd6e879a3103799b7c1f615f"
 				},
 				{
 					"type": "shell",
