@@ -1,7 +1,7 @@
 {
 	"app-id": "org.subsurface_divelog.Subsurface",
 	"runtime": "org.kde.Platform",
-	"runtime-version": "5.9",
+	"runtime-version": "5.10",
 	"sdk": "org.kde.Sdk",
 	"command": "subsurface",
 	"rename-icon": "subsurface-icon",
@@ -153,9 +153,9 @@
 				{
 					"comment": "build doesn't seem to work when using the archive",
 					"type": "git",
-					"url": "git://code.qt.io/qt/qtconnectivity.git",
-					"branch": "v5.9.3"
-}
+					"url": "https://github.com/qt/qtconnectivity",
+					"branch": "v5.10.0"
+				}
 			],
 			"build-commands": [
 					"qmake",
@@ -211,8 +211,8 @@
 			"sources": [
 				{
 					"type":"archive",
-					"url":"https://github.com/Subsurface-divelog/libdc/archive/v4.7.6.tar.gz",
-					"sha256": "38c245fbdb34431438c5eb7c22c966f098bb271f324cec69be4c4871694b3668"
+					"url":"https://github.com/Subsurface-divelog/libdc/archive/v4.7.7.tar.gz",
+					"sha256": "069f7a40062760c6c8efbc3681eed84346aaae1556571ece83a9016386311aca"
 				},
 				{
 					"type": "shell",
