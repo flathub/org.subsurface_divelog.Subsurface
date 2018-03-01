@@ -1,5 +1,7 @@
 {
 	"app-id": "org.subsurface_divelog.Subsurface",
+	"base": "io.qt.qtwebkit.BaseApp",
+	"base-version": "stable",
 	"runtime": "org.kde.Platform",
 	"runtime-version": "5.10",
 	"sdk": "org.kde.Sdk",
@@ -31,28 +33,6 @@
 		"*.cmake"
 	],
 	"modules":[
-		{
-			"name": "qtwebkit",
-			"buildsystem": "simple",
-			"cleanup-platform": [
-				"/bin",
-				"/mkspecs"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "https://github.com/qt/qtwebkit/archive/v5.212.0-alpha2.tar.gz",
-					"sha256": "6db43b931f64857cfda7bcf89914e2730b82164871a8c24c1881620e6bfdeca1"
-				}
-			],
-			"build-commands": [
-				"qmake",
-				"grep -rl '/usr/local' . | xargs sed -i 's|/usr/local|/app|g'",
-				"make",
-				"find . -name \"cmake_install.cmake\" | xargs sed -i 's|/usr|/app|g'",
-				"make install"
-			]
-		},
 		"shared-modules/udev/udev-175.json",
 		{
 			"name": "libical",
