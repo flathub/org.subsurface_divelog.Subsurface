@@ -10,9 +10,10 @@
 	"rename-appdata-file": "subsurface.appdata.xml",
 	"rename-desktop-file": "subsurface.desktop",
 	"finish-args":[
+		"--socket=wayland",
 		"--socket=x11",
+		"--share=ipc",
 		"--share=network",
-		"--filesystem=home",
 		"--device=all",
 		"--system-talk-name=org.bluez",
 		"--env=QTWEBENGINE_DISABLE_SANDBOX=1"
@@ -43,8 +44,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://github.com/libical/libical/archive/v3.0.1.tar.gz",
-					"sha256": "6405964d596aac64fc82c03c4486387fd6a9c09b1f7af1ff251238e66b9e66e1"
+					"url": "https://github.com/libical/libical/archive/v3.0.3.tar.gz",
+					"sha256": "ef9f64540332c2aeb57f299a73c3b0de136f733ae61a281f449013159da94e7c"
 				}
 			]
 		},
@@ -69,8 +70,8 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url":"https://github.com/nih-at/libzip/archive/rel-1-4-0.tar.gz",
-					"sha256": "1cb6df33c41342d1451617155ab2079cda59b8c17ac18ef3cba0b857690acd57"
+					"url":"https://github.com/nih-at/libzip/archive/rel-1-5-0.tar.gz",
+					"sha256": "1fab6da85247cb8e3d492a298f16a6ea3b7f4fe6bf7b8f2df56c5d2487f41b53"
 				}
 			]
 		},
@@ -105,8 +106,8 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url":"https://github.com/libgit2/libgit2/archive/v0.26.0.tar.gz",
-					"sha256": "6a62393e0ceb37d02fe0d5707713f504e7acac9006ef33da1e88960bd78b6eac"
+					"url":"https://github.com/libgit2/libgit2/archive/v0.27.0.tar.gz",
+					"sha256": "545b0458292c786aba334f1bf1c8f73600ae73dd7205a7bb791a187ee48ab8d2"
 				}
 			]
 		},
@@ -116,8 +117,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "http://www.kernel.org/pub/linux/bluetooth/bluez-5.48.tar.xz",
-					"sha256": "b9a8723072ef66bae7ec301c774902ebcb444c9c5b149b5a199e60a1ba970e90"
+					"url": "https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.49.tar.xz",
+					"sha256": "33301d7a514c73d535ee1f91c2aed1af1f2e53efe11d3ac06bcf0d7abed2ce95"
 				},
 				{
 				  "type": "shell",
@@ -171,8 +172,8 @@
 			"sources": [
 				{
 					"type":"archive",
-					"url":"https://github.com/libusb/libusb/archive/v1.0.21.tar.gz",
-					"sha256": "1a5b08c05bc5e38c81c2d59c29954d5916646f4ff46f51381b3f624384e4ac01"
+					"url":"https://github.com/libusb/libusb/archive/v1.0.22.tar.gz",
+					"sha256": "3500f7b182750cd9ccf9be8b1df998f83df56a39ab264976bdb3307773e16f48"
 				}
 			]
 		},
@@ -191,8 +192,8 @@
 			"sources": [
 				{
 					"type":"archive",
-					"url":"https://github.com/Subsurface-divelog/libdc/archive/v4.7.7.tar.gz",
-					"sha256": "069f7a40062760c6c8efbc3681eed84346aaae1556571ece83a9016386311aca"
+					"url":"https://github.com/Subsurface-divelog/libdc/archive/v4.7.8.tar.gz",
+					"sha256": "5e07e6895cd39f4727a7c080798e402932aca8aa2645abcc1958daddd12b30e7"
 				},
 				{
 					"type": "shell",
@@ -217,8 +218,8 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url": "https://github.com/Subsurface-divelog/subsurface/archive/v4.7.7.tar.gz",
-					"sha256": "125d8a538d3be1523d9c69eba47aece1a303c592bd6e879a3103799b7c1f615f"
+					"url": "https://github.com/Subsurface-divelog/subsurface/archive/v4.7.8.tar.gz",
+					"sha256": "f40e763b50dba7465aa6c65b4ab5975d766037d460163c7fb234559328fc4289"
 				},
 				{
 					"type": "shell",
