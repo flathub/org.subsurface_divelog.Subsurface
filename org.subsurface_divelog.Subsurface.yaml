@@ -1,0 +1,176 @@
+app-id: org.subsurface_divelog.Subsurface
+base: io.qt.qtwebkit.BaseApp
+base-version: stable
+runtime: org.kde.Platform
+runtime-version: 5.11
+sdk: org.kde.Sdk
+command: subsurface
+rename-icon: subsurface-icon
+rename-appdata-file: subsurface.appdata.xml
+rename-desktop-file: subsurface.desktop
+finish-args:
+- --socket=wayland
+- --socket=x11
+- --share=ipc
+- --share=network
+- --device=all
+- --system-talk-name=org.bluez
+- --env=QTWEBENGINE_DISABLE_SANDBOX=1
+build-options:
+  cflags: -O2
+  cxxflags: -O2
+cleanup:
+- /include
+- /lib/pkgconfig
+- /lib64/pkgconfig
+- /lib/cmake
+- /share/doc
+- /share/man
+- "*.a"
+- "*.la"
+- "*.cmake"
+modules:
+- shared-modules/udev/udev-175.json
+
+- name: libical
+  cleanup:
+  - /lib/cmake
+  buildsystem: cmake-ninja
+  config-opts:
+  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
+  - -DBUILD_SHARED_LIBS:BOOL=ON
+  sources:
+  - type: archive
+    url: https://github.com/libical/libical/archive/v3.0.3.tar.gz
+    sha256: ef9f64540332c2aeb57f299a73c3b0de136f733ae61a281f449013159da94e7c
+
+- name: libssh2
+  buildsystem: cmake
+  config-opts:
+  - -DCMAKE_INSTALL_LIBDIR=/app/lib
+  - -DCMAKE_C_FLAGS=-fPIC
+  sources:
+  - type: archive
+    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.0.tar.gz
+    sha256: 973f63f98141d68b4a1bc85791ee29411eeab12a6230ae1aca9c368550ccafae
+
+- name: libzip
+  buildsystem: cmake-ninja
+  sources:
+  - type: archive
+    url: https://github.com/nih-at/libzip/archive/rel-1-5-1.tar.gz
+    sha256: 3ca79ff6b9a02b3e3bcf0b45f30a8159c3146658f57c8b6be0a370eabd3db071
+
+- name: grantlee
+  buildsystem: cmake-ninja
+  config-opts:
+  - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
+  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
+  - -DCMAKE_BUILD_TYPE=Release
+  - -DCMAKE_INSTALL_PREFIX=/app
+  - -DBUILD__TESTS=NO
+  sources:
+  - type: archive
+    url: https://github.com/steveire/grantlee/archive/v5.1.0.tar.gz
+    sha256: 3836572fe5e49d28a1d99186c6d96f88ff839644b4bc77b73b6d8208f6ccc9d1
+
+- name: libgit
+  buildsystem: cmake-ninja
+  config-opts:
+  - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
+  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
+  - -DCMAKE_BUILD_TYPE=Release
+  - -DCMAKE_INSTALL_PREFIX=/app
+  - -DBUILD_CLAR=OFF
+  sources:
+  - type: archive
+    url: https://github.com/libgit2/libgit2/archive/v0.27.2.tar.gz
+    sha256: ffacdbd5588aeb03e98e3866a7e2ceace468723a439bdc9bb01362fe140fa9e5
+
+- name: bluez
+  config-opts:
+  - --disable-datafiles
+  - --disable-systemd
+  - --enable-library
+  - --prefix=/app
+  - --sysconfdir=/app/etc
+  sources:
+  - type: archive
+    url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.49.tar.xz
+    sha256: 33301d7a514c73d535ee1f91c2aed1af1f2e53efe11d3ac06bcf0d7abed2ce95
+  - type: shell
+    commands:
+    - sed -i 's|${exec_prefix}|/app|g' /app/share/pkgconfig/udev.pc
+
+- name: qt5-connectivity
+  buildsystem: simple
+  cleanup-platform:
+  - /bin
+  - /mkspecs
+  sources:
+  - type: git # build doesn't seem to work when using the archive
+    url: https://github.com/qt/qtconnectivity
+    branch: v5.11.1
+  build-commands:
+  - qmake
+  - make
+  - cp -r -n bin /app
+  - cp -r -n include /app
+  - cp -r -n lib /app
+  - mkdir -p /app/src/bluetooth
+  - cp -r src/bluetooth /app/src/
+
+- name: googlemaps
+  buildsystem: simple
+  sources:
+  - type: git
+    url: https://github.com/Subsurface-divelog/googlemaps.git
+  build-commands:
+  - mkdir build
+  - cd build &&
+    qmake PREFIX=/app ../googlemaps.pro &&
+    sed -i 's|(INSTALL_ROOT)/usr|/app|g' Makefile &&
+    make -j4 &&
+    make install
+
+- name: libusb
+  sources:
+  - type: archive
+    url: https://github.com/libusb/libusb/archive/v1.0.22.tar.gz
+    sha256: 3500f7b182750cd9ccf9be8b1df998f83df56a39ab264976bdb3307773e16f48
+
+- name: hidapi
+  sources:
+  - type: archive
+    url: https://github.com/signal11/hidapi/archive/hidapi-0.8.0-rc1.tar.gz
+    sha256: 3c147200bf48a04c1e927cd81589c5ddceff61e6dac137a605f6ac9793f4af61
+
+- name: libdivecomputer
+  sources:
+  - type: archive
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.0.tar.gz
+    sha256: 54ef65fda31b8ca30bc19268922cd376551d224ca7480741dd180b04d3cef994
+  - type: shell
+    commands:
+    - autoreconf --install
+
+- name: subsurface
+  buildsystem: cmake
+  builddir: true
+  config-opts:
+  - -DCMAKE_BUILD_TYPE=Release
+  - -DSUBSURFACE_TARGET_EXECUTABLE=DesktopExecutable
+  - -DLIBDIVECOMPUTER_INCLUDE_DIR=/app/include
+  - -DLIBDIVECOMPUTER_LIBRARIES=/app/lib/libdivecomputer.a
+  - -DCMAKE_PREFIX_PATH=/app
+  - -DNO_PRINTING=OFF
+  - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+  make-args:
+  - LIBRARY_PATH=/app/lib
+  sources:
+  - type: archive
+    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.0.tar.gz
+    sha256: 2fd7789a7f6362487fa41c227b7347b9aea46cfae24e48404c0bb57a44ade107
+  - type: shell
+    commands:
+    - install -Dm644 appdata/subsurface.appdata.xml /app/share/metainfo/subsurface.appdata.xml
