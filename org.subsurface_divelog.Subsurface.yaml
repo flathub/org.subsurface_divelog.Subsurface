@@ -37,6 +37,7 @@ modules:
   - /lib/cmake
   buildsystem: cmake-ninja
   config-opts:
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
   - -DBUILD_SHARED_LIBS:BOOL=ON
   sources:
@@ -47,6 +48,7 @@ modules:
 - name: libssh2
   buildsystem: cmake
   config-opts:
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DCMAKE_INSTALL_LIBDIR=/app/lib
   - -DCMAKE_C_FLAGS=-fPIC
   sources:
@@ -56,6 +58,8 @@ modules:
 
 - name: libzip
   buildsystem: cmake-ninja
+  config-opts:
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
     url: https://github.com/nih-at/libzip/archive/rel-1-5-1.tar.gz
@@ -66,7 +70,7 @@ modules:
   config-opts:
   - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
   - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
-  - -DCMAKE_BUILD_TYPE=Release
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DCMAKE_INSTALL_PREFIX=/app
   - -DBUILD__TESTS=NO
   sources:
@@ -79,7 +83,7 @@ modules:
   config-opts:
   - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
   - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
-  - -DCMAKE_BUILD_TYPE=Release
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DCMAKE_INSTALL_PREFIX=/app
   - -DBUILD_CLAR=OFF
   sources:
@@ -129,7 +133,7 @@ modules:
   - mkdir build
   - cd build &&
     qmake PREFIX=/app ../googlemaps.pro &&
-    sed -i 's|(INSTALL_ROOT)/usr|/app|g' Makefile &&
+    sed -i 's|(INSTALL_ROOT)/usr|//app|g' Makefile &&
     make -j4 &&
     make install
 
@@ -158,7 +162,7 @@ modules:
   buildsystem: cmake
   builddir: true
   config-opts:
-  - -DCMAKE_BUILD_TYPE=Release
+  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DSUBSURFACE_TARGET_EXECUTABLE=DesktopExecutable
   - -DLIBDIVECOMPUTER_INCLUDE_DIR=/app/include
   - -DLIBDIVECOMPUTER_LIBRARIES=/app/lib/libdivecomputer.a
