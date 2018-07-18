@@ -15,7 +15,6 @@ finish-args:
 - --share=network
 - --device=all
 - --system-talk-name=org.bluez
-- --env=QTWEBENGINE_DISABLE_SANDBOX=1
 build-options:
   cflags: -O2
   cxxflags: -O2
@@ -25,7 +24,10 @@ cleanup:
 - /lib64/pkgconfig
 - /lib/cmake
 - /share/doc
+- /share/gtk-doc
 - /share/man
+- /share/pkgconfig
+- /src
 - "*.a"
 - "*.la"
 - "*.cmake"
@@ -38,8 +40,8 @@ modules:
   buildsystem: cmake-ninja
   config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
-  - -DBUILD_SHARED_LIBS:BOOL=ON
+  - -DCMAKE_INSTALL_LIBDIR=/app/lib
+  - -DBUILD_SHARED_LIBS=ON
   sources:
   - type: archive
     url: https://github.com/libical/libical/archive/v3.0.3.tar.gz
@@ -68,24 +70,16 @@ modules:
 - name: grantlee
   buildsystem: cmake-ninja
   config-opts:
-  - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
-  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  - -DCMAKE_INSTALL_PREFIX=/app
-  - -DBUILD__TESTS=NO
   sources:
   - type: archive
     url: https://github.com/steveire/grantlee/archive/v5.1.0.tar.gz
     sha256: 3836572fe5e49d28a1d99186c6d96f88ff839644b4bc77b73b6d8208f6ccc9d1
 
-- name: libgit
+- name: libgit2
   buildsystem: cmake-ninja
   config-opts:
-  - -DCMAKE_INSTALL_INCLUDEDIR:PATH=/app/include
-  - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  - -DCMAKE_INSTALL_PREFIX=/app
-  - -DBUILD_CLAR=OFF
   sources:
   - type: archive
     url: https://github.com/libgit2/libgit2/archive/v0.27.2.tar.gz
@@ -106,7 +100,7 @@ modules:
     commands:
     - sed -i 's|${exec_prefix}|/app|g' /app/share/pkgconfig/udev.pc
 
-- name: qt5-connectivity
+- name: qtconnectivity
   buildsystem: simple
   cleanup-platform:
   - /bin
@@ -149,11 +143,20 @@ modules:
     url: https://github.com/signal11/hidapi/archive/hidapi-0.8.0-rc1.tar.gz
     sha256: 3c147200bf48a04c1e927cd81589c5ddceff61e6dac137a605f6ac9793f4af61
 
-- name: libdivecomputer
+- name: libftdi
+  buildsystem: cmake-ninja
+  config-opts:
+  - -DLIB_SUFFIX=
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.0.tar.gz
-    sha256: 54ef65fda31b8ca30bc19268922cd376551d224ca7480741dd180b04d3cef994
+    url: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-1.4.tar.bz2
+    sha256: ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74
+
+- name: libdc
+  sources:
+  - type: archive
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.1.tar.gz
+    sha256: a9a684ad94f3d6b92b534821f8833c9343dec16d40ee9e9c339b04ce9e1c3311
   - type: shell
     commands:
     - autoreconf --install
@@ -163,18 +166,9 @@ modules:
   builddir: true
   config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  - -DSUBSURFACE_TARGET_EXECUTABLE=DesktopExecutable
-  - -DLIBDIVECOMPUTER_INCLUDE_DIR=/app/include
-  - -DLIBDIVECOMPUTER_LIBRARIES=/app/lib/libdivecomputer.a
-  - -DCMAKE_PREFIX_PATH=/app
-  - -DNO_PRINTING=OFF
+  - -DFTDISUPPORT=ON
   - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
-  make-args:
-  - LIBRARY_PATH=/app/lib
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.0.tar.gz
-    sha256: 2fd7789a7f6362487fa41c227b7347b9aea46cfae24e48404c0bb57a44ade107
-  - type: shell
-    commands:
-    - install -Dm644 appdata/subsurface.appdata.xml /app/share/metainfo/subsurface.appdata.xml
+    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.1.tar.gz
+    sha256: 6e5ae4771f9bfb778e03f77946bed4fb437b335ad0fc655a90c32fc024c42f1b
