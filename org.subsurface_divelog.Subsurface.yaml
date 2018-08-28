@@ -1,8 +1,8 @@
 app-id: org.subsurface_divelog.Subsurface
 base: io.qt.qtwebkit.BaseApp
-base-version: stable
+base-version: '5.11'
 runtime: org.kde.Platform
-runtime-version: 5.11
+runtime-version: '5.11'
 sdk: org.kde.Sdk
 command: subsurface
 rename-icon: subsurface-icon
