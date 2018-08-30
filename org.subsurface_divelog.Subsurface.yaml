@@ -96,9 +96,6 @@ modules:
   - type: archive
     url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.49.tar.xz
     sha256: 33301d7a514c73d535ee1f91c2aed1af1f2e53efe11d3ac06bcf0d7abed2ce95
-  - type: shell
-    commands:
-    - sed -i 's|${exec_prefix}|/app|g' /app/share/pkgconfig/udev.pc
 
 - name: qtconnectivity
   buildsystem: simple
