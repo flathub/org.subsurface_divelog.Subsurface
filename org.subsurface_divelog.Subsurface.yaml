@@ -10,11 +10,11 @@ rename-appdata-file: subsurface.appdata.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
 - --socket=wayland
-- --socket=x11
+- --socket=fallback-x11
 - --share=ipc
 - --share=network
-- --device=all
-- --system-talk-name=org.bluez
+- --device=all # required to talk to dive computers
+- --system-talk-name=org.bluez # required to talk to dive computers
 build-options:
   cflags: -O2
   cxxflags: -O2
@@ -166,6 +166,12 @@ modules:
   - -DFTDISUPPORT=ON
   - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
   sources:
-  - type: archive
-    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.1.tar.gz
-    sha256: 6e5ae4771f9bfb778e03f77946bed4fb437b335ad0fc655a90c32fc024c42f1b
+  - type: git
+    url: https://github.com/Subsurface-divelog/subsurface
+    branch: v4.8.1
+    commit: b2422f88569a2bba50db74835fcd09dd5b070ec9
+  - type: file
+    path: ./set_up_version.sh
+  - type: shell
+    commands:
+    - ./set_up_version.sh
