@@ -44,8 +44,8 @@ modules:
   - -DBUILD_SHARED_LIBS=ON
   sources:
   - type: archive
-    url: https://github.com/libical/libical/archive/v3.0.3.tar.gz
-    sha256: ef9f64540332c2aeb57f299a73c3b0de136f733ae61a281f449013159da94e7c
+    url: https://github.com/libical/libical/archive/v3.0.4.tar.gz
+    sha256: 20f39343701ccd3ad896a9f9e982fdf85c1d3a35572e9d962216b69a64aef2ae
 
 - name: libssh2
   buildsystem: cmake
@@ -82,8 +82,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/libgit2/libgit2/archive/v0.27.2.tar.gz
-    sha256: ffacdbd5588aeb03e98e3866a7e2ceace468723a439bdc9bb01362fe140fa9e5
+    url: https://github.com/libgit2/libgit2/archive/v0.27.4.tar.gz
+    sha256: 0b7ca31cb959ff1b22afa0da8621782afe61f99242bf716c403802ffbdb21d51
 
 - name: bluez
   config-opts:
@@ -94,8 +94,8 @@ modules:
   - --sysconfdir=/app/etc
   sources:
   - type: archive
-    url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.49.tar.xz
-    sha256: 33301d7a514c73d535ee1f91c2aed1af1f2e53efe11d3ac06bcf0d7abed2ce95
+    url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
+    sha256: 5ffcaae18bbb6155f1591be8c24898dc12f062075a40b538b745bfd477481911
 
 - name: qtconnectivity
   buildsystem: simple
@@ -105,7 +105,8 @@ modules:
   sources:
   - type: git # build doesn't seem to work when using the archive
     url: https://github.com/qt/qtconnectivity
-    branch: v5.11.1
+    branch: v5.11.2
+    commit: 8b70dcb210d82a55220c0a953653646a91d55251
   build-commands:
   - qmake
   - make
@@ -152,8 +153,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.1.tar.gz
-    sha256: a9a684ad94f3d6b92b534821f8833c9343dec16d40ee9e9c339b04ce9e1c3311
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.2.tar.gz
+    sha256: 459cee6a3f2a687aba53e025a4172d041d66ed40f2a837c51f7eb2beccfbbf1e
   - type: shell
     commands:
     - autoreconf --install
@@ -168,10 +169,13 @@ modules:
   sources:
   - type: git
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.1
-    commit: b2422f88569a2bba50db74835fcd09dd5b070ec9
+    branch: v4.8.2
+    commit: ded7802a8851a2fe7bb98ee9fdb178010487970f
   - type: file
     path: ./set_up_version.sh
   - type: shell
     commands:
     - ./set_up_version.sh
+  - type: shell
+    commands:
+    - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|" -i core/qt-init.cpp
