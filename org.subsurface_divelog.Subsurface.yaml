@@ -9,12 +9,14 @@ rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
-- --socket=wayland
+# - --socket=wayland (disabled until Qt 5.12 is relased)
 - --socket=fallback-x11
 - --share=ipc
 - --share=network
 - --device=all # required to talk to dive computers
 - --system-talk-name=org.bluez # required to talk to dive computers
+- --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
+- --talk-name=com.canonical.AppMenu.Registrar # gives application access to dbus menu
 build-options:
   cflags: -O2
   cxxflags: -O2
@@ -153,8 +155,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.2.tar.gz
-    sha256: 459cee6a3f2a687aba53e025a4172d041d66ed40f2a837c51f7eb2beccfbbf1e
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.3.tar.gz
+    sha256: b10dc86c43f4906f4a9301a187560b26fdc0ef4e62010093cedca59951cca286
   - type: shell
     commands:
     - autoreconf --install
@@ -169,8 +171,8 @@ modules:
   sources:
   - type: git
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.2
-    commit: ded7802a8851a2fe7bb98ee9fdb178010487970f
+    branch: v4.8.3
+    commit: b80fd26e81d5de5c3b6871a565e8f7449df16bc5
   - type: file
     path: ./set_up_version.sh
   - type: shell
