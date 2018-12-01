@@ -9,7 +9,7 @@ rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
-# - --socket=wayland (disabled until Qt 5.12 is relased)
+# - --socket=wayland (disabled until Qt 5.12 is released)
 - --socket=fallback-x11
 - --share=ipc
 - --share=network
@@ -84,8 +84,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/libgit2/libgit2/archive/v0.27.4.tar.gz
-    sha256: 0b7ca31cb959ff1b22afa0da8621782afe61f99242bf716c403802ffbdb21d51
+    url: https://github.com/libgit2/libgit2/archive/v0.27.7.tar.gz
+    sha256: 1a5435a483759b1cd96feb12b11abb5231b0688016db506ce5947178f6ba2531
 
 - name: bluez
   config-opts:
@@ -154,9 +154,9 @@ modules:
 
 - name: libdc
   sources:
-  - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.3.tar.gz
-    sha256: b10dc86c43f4906f4a9301a187560b26fdc0ef4e62010093cedca59951cca286
+  - type: git
+    url: https://github.com/Subsurface-divelog/libdc
+    branch: Subsurface-NG
   - type: shell
     commands:
     - autoreconf --install
@@ -171,8 +171,8 @@ modules:
   sources:
   - type: git
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.3
-    commit: b80fd26e81d5de5c3b6871a565e8f7449df16bc5
+    branch: v4.8.4
+    commit: 82aa0da5ec31dc5ffed76805fbc21de25b548463
   - type: file
     path: ./set_up_version.sh
   - type: shell
