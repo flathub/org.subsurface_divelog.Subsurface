@@ -1,15 +1,15 @@
 app-id: org.subsurface_divelog.Subsurface
-base: io.qt.qtwebkit.BaseApp
-base-version: '5.11'
-runtime: org.kde.Platform
-runtime-version: '5.11'
 sdk: org.kde.Sdk
+runtime: org.kde.Platform
+runtime-version: '5.12'
+base: io.qt.qtwebkit.BaseApp
+base-version: '5.12'
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
-# - --socket=wayland (disabled until Qt 5.12 is released)
+- --socket=wayland
 - --socket=fallback-x11
 - --share=ipc
 - --share=network
@@ -17,9 +17,6 @@ finish-args:
 - --system-talk-name=org.bluez # required to talk to dive computers
 - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
 - --talk-name=com.canonical.AppMenu.Registrar # gives application access to dbus menu
-build-options: # remove this after switching to the 5.12 SDK
-  cflags: -O2
-  cxxflags: -O2
 cleanup:
 - /include
 - /lib/pkgconfig
@@ -107,8 +104,8 @@ modules:
   sources:
   - type: git # build doesn't seem to work when using the archive
     url: https://github.com/qt/qtconnectivity
-    branch: v5.11.3
-    commit: d1cf8dad0e6d8d08b5c6f2f08d85a0e75b0bcf8a
+    branch: v5.12.1
+    commit: 736d3e14bbf28c90ff51c017ceea6c2bc0c7698d
   build-commands:
   - qmake
   - make -j $FLATPAK_BUILDER_N_JOBS
@@ -169,10 +166,9 @@ modules:
   - -DFTDISUPPORT=ON
   - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
   sources:
-  - type: git
-    url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.5
-    commit: a6e0cb79d1a770ecebc02a591a7ed54f54ca871b
+  - type: archive
+    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.5.tar.gz
+    sha256: cc1feb6c5dd58ea1e090a12aab84bef23cddfcd10306f89b1a323d7e9449bf2a
   - type: file
     path: ./set_up_version.sh
   - type: shell
