@@ -166,9 +166,10 @@ modules:
   - -DFTDISUPPORT=ON
   - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
   sources:
-  - type: archive
-    url: https://github.com/Subsurface-divelog/subsurface/archive/v4.8.5.tar.gz
-    sha256: cc1feb6c5dd58ea1e090a12aab84bef23cddfcd10306f89b1a323d7e9449bf2a
+  - type: git # use git in order to make set_up_version.sh work
+    url: https://github.com/Subsurface-divelog/subsurface
+    branch: v4.8.5
+    commit: a6e0cb79d1a770ecebc02a591a7ed54f54ca871b
   - type: file
     path: ./set_up_version.sh
   - type: shell
