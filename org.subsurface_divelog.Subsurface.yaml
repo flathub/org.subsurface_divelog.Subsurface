@@ -9,7 +9,7 @@ rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
-- --socket=wayland
+#  - --socket=wayland (requires https://bugreports.qt.io/browse/QTBUG-68619 to be fixed)
 - --socket=fallback-x11
 - --share=ipc
 - --share=network
