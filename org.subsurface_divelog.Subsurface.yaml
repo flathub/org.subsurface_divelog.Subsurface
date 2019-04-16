@@ -54,8 +54,8 @@ modules:
   - -DCMAKE_C_FLAGS=-fPIC
   sources:
   - type: archive
-    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.0.tar.gz
-    sha256: 973f63f98141d68b4a1bc85791ee29411eeab12a6230ae1aca9c368550ccafae
+    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.2.tar.gz
+    sha256: f12261afb02b94f9666ec0427bbdd3c288602a4b96df4a684621b5553d3ed694
 
 - name: libzip
   buildsystem: cmake-ninja
@@ -63,8 +63,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/nih-at/libzip/archive/rel-1-5-1.tar.gz
-    sha256: 3ca79ff6b9a02b3e3bcf0b45f30a8159c3146658f57c8b6be0a370eabd3db071
+    url: https://github.com/nih-at/libzip/archive/rel-1-5-2.tar.gz
+    sha256: 905ae156f7590f4f3ab251cb79a0a48023848a7ae176143ec9467a9421bdb699
 
 - name: grantlee
   buildsystem: cmake-ninja
@@ -81,8 +81,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/libgit2/libgit2/archive/v0.27.8.tar.gz
-    sha256: 8313873d49dc01e8b880ec334d7430ae67496a89aaa8c6e7bbd3affb47a00c76
+    url: https://github.com/libgit2/libgit2/archive/v0.28.1.tar.gz
+    sha256: 0ca11048795b0d6338f2e57717370208c2c97ad66c6d5eac0c97a8827d13936b
 
 - name: bluez
   config-opts:
@@ -152,8 +152,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.5.tar.gz
-    sha256: 1e219c95ac512a9a056577747b766c6e1e895d1b9269445dd0bd36e2cd11c57a
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.6.tar.gz
+    sha256: 6d9c7b2a9f3910803507b33fee268fee1d0b88b8bd07a1edfe832d6e1fb8f13a
   - type: shell
     commands:
     - autoreconf --install
