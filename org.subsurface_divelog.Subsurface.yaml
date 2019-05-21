@@ -43,8 +43,8 @@ modules:
   - -DBUILD_SHARED_LIBS=ON
   sources:
   - type: archive
-    url: https://github.com/libical/libical/archive/v3.0.4.tar.gz
-    sha256: 20f39343701ccd3ad896a9f9e982fdf85c1d3a35572e9d962216b69a64aef2ae
+    url: https://github.com/libical/libical/archive/v3.0.5.tar.gz
+    sha256: 483acbf7fee66ca071c2ff8183e46b6f2b3a89e1e866eadf4870eaaa281c8db1
 
 - name: libssh2
   buildsystem: cmake
@@ -54,8 +54,8 @@ modules:
   - -DCMAKE_C_FLAGS=-fPIC
   sources:
   - type: archive
-    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.0.tar.gz
-    sha256: 973f63f98141d68b4a1bc85791ee29411eeab12a6230ae1aca9c368550ccafae
+    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.2.tar.gz
+    sha256: f12261afb02b94f9666ec0427bbdd3c288602a4b96df4a684621b5553d3ed694
 
 - name: libzip
   buildsystem: cmake-ninja
@@ -63,8 +63,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/nih-at/libzip/archive/rel-1-5-1.tar.gz
-    sha256: 3ca79ff6b9a02b3e3bcf0b45f30a8159c3146658f57c8b6be0a370eabd3db071
+    url: https://github.com/nih-at/libzip/archive/rel-1-5-2.tar.gz
+    sha256: 905ae156f7590f4f3ab251cb79a0a48023848a7ae176143ec9467a9421bdb699
 
 - name: grantlee
   buildsystem: cmake-ninja
@@ -81,8 +81,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/libgit2/libgit2/archive/v0.27.8.tar.gz
-    sha256: 8313873d49dc01e8b880ec334d7430ae67496a89aaa8c6e7bbd3affb47a00c76
+    url: https://github.com/libgit2/libgit2/archive/v0.28.2.tar.gz
+    sha256: 42b5f1e9b9159d66d86fff0394215c5733b6ef8f9b9d054cdd8c73ad47177fc3
 
 - name: bluez
   config-opts:
@@ -104,8 +104,8 @@ modules:
   sources:
   - type: git # build doesn't seem to work when using the archive
     url: https://github.com/qt/qtconnectivity
-    branch: v5.12.1
-    commit: 736d3e14bbf28c90ff51c017ceea6c2bc0c7698d
+    branch: 5.12.4
+    commit: 14b0efe1d4e5addec5f577a2d01a3a0d9a1d931b
   build-commands:
   - qmake
   - make -j $FLATPAK_BUILDER_N_JOBS
@@ -152,8 +152,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.5.tar.gz
-    sha256: 1e219c95ac512a9a056577747b766c6e1e895d1b9269445dd0bd36e2cd11c57a
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.6.tar.gz
+    sha256: 6d9c7b2a9f3910803507b33fee268fee1d0b88b8bd07a1edfe832d6e1fb8f13a
   - type: shell
     commands:
     - autoreconf --install
@@ -168,8 +168,8 @@ modules:
   sources:
   - type: git # use git in order to make HandleVersionGeneration.cmake work
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.5
-    commit: a6e0cb79d1a770ecebc02a591a7ed54f54ca871b
+    branch: v4.8.6
+    commit: 209852915217ee4954d8647da438bcb921481a62
   - type: shell
     commands:
     - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|" -i core/qt-init.cpp
