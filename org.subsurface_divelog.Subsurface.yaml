@@ -104,7 +104,7 @@ modules:
   sources:
   - type: git # build doesn't seem to work when using the archive
     url: https://github.com/qt/qtconnectivity
-    branch: v5.12.4
+    branch: 5.12.4
     commit: 14b0efe1d4e5addec5f577a2d01a3a0d9a1d931b
   build-commands:
   - qmake
