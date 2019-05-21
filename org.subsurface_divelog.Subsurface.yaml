@@ -44,7 +44,7 @@ modules:
   sources:
   - type: archive
     url: https://github.com/libical/libical/archive/v3.0.5.tar.gz
-    sha256: 7ad550c8c49c9b9983658e3ab3e68b1eee2439ec17b169a6b1e6ecb5274e78e6
+    sha256: 483acbf7fee66ca071c2ff8183e46b6f2b3a89e1e866eadf4870eaaa281c8db1
 
 - name: libssh2
   buildsystem: cmake
