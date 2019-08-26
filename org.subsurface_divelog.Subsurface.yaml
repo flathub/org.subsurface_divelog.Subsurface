@@ -54,8 +54,8 @@ modules:
   - -DCMAKE_C_FLAGS=-fPIC
   sources:
   - type: archive
-    url: https://github.com/libssh2/libssh2/archive/libssh2-1.8.2.tar.gz
-    sha256: f12261afb02b94f9666ec0427bbdd3c288602a4b96df4a684621b5553d3ed694
+    url: https://github.com/libssh2/libssh2/archive/libssh2-1.9.0.tar.gz
+    sha256: db257d41754b16518c3bd0c3b8dd08940ccbee5fc44cef7bfb052d930bcbbda3
 
 - name: libzip
   buildsystem: cmake-ninja
@@ -105,7 +105,7 @@ modules:
   - type: git # build doesn't seem to work when using the archive
     url: https://github.com/qt/qtconnectivity
     branch: 5.12.4
-    commit: 14b0efe1d4e5addec5f577a2d01a3a0d9a1d931b
+    commit: f6be1f73a810514335ab3d27e1d05825a36b06af
   build-commands:
   - qmake
   - make -j $FLATPAK_BUILDER_N_JOBS
@@ -152,8 +152,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.8.6.tar.gz
-    sha256: 6d9c7b2a9f3910803507b33fee268fee1d0b88b8bd07a1edfe832d6e1fb8f13a
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.9.0.tar.gz
+    sha256: f8f29d52ebed24635e9cb7e5c3ad219b1b48cc2f5d213da13cf44fec4b89001d
   - type: shell
     commands:
     - autoreconf --install
@@ -168,8 +168,8 @@ modules:
   sources:
   - type: git # use git in order to make HandleVersionGeneration.cmake work
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.8.6
-    commit: 209852915217ee4954d8647da438bcb921481a62
+    branch: v4.9.0
+    commit: 342d04631eca0b2cc6138d2361e41a29ffb982e0
   - type: shell
     commands:
     - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|" -i core/qt-init.cpp
