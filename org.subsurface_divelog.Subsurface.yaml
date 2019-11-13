@@ -88,6 +88,7 @@ modules:
   config-opts:
   - --disable-datafiles
   - --disable-systemd
+  - --disable-udev
   - --enable-library
   - --prefix=/app
   - --sysconfdir=/app/etc
