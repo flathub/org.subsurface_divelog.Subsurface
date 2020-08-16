@@ -1,9 +1,9 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: '5.12'
+runtime-version: '5.14'
 base: io.qt.qtwebkit.BaseApp
-base-version: '5.12'
+base-version: '5.14'
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
@@ -72,8 +72,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/steveire/grantlee/archive/v5.1.0.tar.gz
-    sha256: 3836572fe5e49d28a1d99186c6d96f88ff839644b4bc77b73b6d8208f6ccc9d1
+    url: https://github.com/steveire/grantlee/archive/v5.2.0.tar.gz
+    sha256: 139acee5746b957bdf1327ec0d97c604d4c0b9be42aec5d584297cb5ed6a990a
 
 - name: libgit2
   buildsystem: cmake-ninja
@@ -94,8 +94,8 @@ modules:
   - --sysconfdir=/app/etc
   sources:
   - type: archive
-    url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
-    sha256: 5ffcaae18bbb6155f1591be8c24898dc12f062075a40b538b745bfd477481911
+    url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
+    sha256: 68cdab9e63e8832b130d5979dc8c96fdb087b31278f342874d992af3e56656dc
 
 - name: qtconnectivity
   buildsystem: simple
@@ -153,8 +153,8 @@ modules:
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.9.0.tar.gz
-    sha256: f8f29d52ebed24635e9cb7e5c3ad219b1b48cc2f5d213da13cf44fec4b89001d
+    url: https://github.com/Subsurface-divelog/libdc/archive/v4.9.6.tar.gz
+    sha256: 86f7bd75dee852fabf4418d7e3a3a0eca5ced30df084bccd5f14a1d01352c747
   - type: shell
     commands:
     - autoreconf --install
@@ -169,8 +169,8 @@ modules:
   sources:
   - type: git # use git in order to make HandleVersionGeneration.cmake work
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.9.0
-    commit: 342d04631eca0b2cc6138d2361e41a29ffb982e0
+    branch: v4.9.6
+    commit: edc1499e9153907c2901611516a0592db3f56e56
   - type: shell
     commands:
     - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|" -i core/qt-init.cpp
