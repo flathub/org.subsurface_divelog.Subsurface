@@ -31,7 +31,6 @@ cleanup:
 - "*.la"
 - "*.cmake"
 modules:
-- shared-modules/gudev/gudev.json
 - shared-modules/libusb/libusb.json
 
 - name: libical
@@ -47,9 +46,9 @@ modules:
     - -DICAL_GLIB_VAPI=False
     # - -DCMAKE_INSTALL_LIBDIR=/app/lib
   sources:
-    - type: archive
-      url: https://github.com/libical/libical/releases/download/v3.0.8/libical-3.0.8.tar.gz
-      sha512: ce015e6d4c1c7cb4af7b45748ce8251c663f80f6a4357ddff6a97796642619abe882f4cadeca10cabeb1b25577869f436da15bca882e032eb3ff0475f6010d8b
+  - type: archive
+    url: https://github.com/libical/libical/archive/v3.0.9.tar.gz
+    sha256: bd26d98b7fcb2eb0cd5461747bbb02024ebe38e293ca53a7dfdcb2505265a728
   cleanup:
     - /lib/cmake
 
@@ -71,8 +70,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/nih-at/libzip/archive/rel-1-5-2.tar.gz
-    sha256: 905ae156f7590f4f3ab251cb79a0a48023848a7ae176143ec9467a9421bdb699
+    url: https://github.com/nih-at/libzip/archive/v1.7.3.tar.gz
+    sha256: c0a086901dfc8bda0fb8695f2d3c8050ed140b7899536b9348bcc72b47b2f307
 
 - name: grantlee
   buildsystem: cmake-ninja
@@ -89,8 +88,8 @@ modules:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   sources:
   - type: archive
-    url: https://github.com/libgit2/libgit2/archive/v0.28.2.tar.gz
-    sha256: 42b5f1e9b9159d66d86fff0394215c5733b6ef8f9b9d054cdd8c73ad47177fc3
+    url: https://github.com/libgit2/libgit2/archive/v1.1.0.tar.gz
+    sha256: 41a6d5d740fd608674c7db8685685f45535323e73e784062cf000a633d420d1e
 
 - name: bluez
   config-opts:
@@ -107,8 +106,8 @@ modules:
   - "--sysconfdir=/app/etc"
   sources:
   - type: archive
-    url: https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
-    sha256: 5ffcaae18bbb6155f1591be8c24898dc12f062075a40b538b745bfd477481911
+    url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
+    sha256: 68cdab9e63e8832b130d5979dc8c96fdb087b31278f342874d992af3e56656dc
 
 - name: qtconnectivity
   buildsystem: simple
@@ -116,7 +115,7 @@ modules:
   - /bin
   - /mkspecs
   sources:
-  - type: git # build doesn't seem to work when using the archive
+  - type: git # build fails when using the archive
     url: https://github.com/qt/qtconnectivity
     branch: 5.14.2
     commit: b445ea4ff203fbcb5011adae0236dd028f11bc89
@@ -145,23 +144,30 @@ modules:
 - name: hidapi
   sources:
   - type: archive
-    url: https://github.com/libusb/hidapi/archive/hidapi-0.9.0.tar.gz
-    sha256: 630ee1834bdd5c5761ab079fd04f463a89585df8fcae51a7bfe4229b1e02a652
+    url: https://github.com/libusb/hidapi/archive/hidapi-0.10.1.tar.gz
+    sha256: f71dd8a1f46979c17ee521bc2117573872bbf040f8a4750e492271fc141f2644
+
+- name: libconfuse # build dependency of libftdi
+  sources:
+  - type: archive
+    url: https://github.com/libconfuse/libconfuse/archive/v3.3.tar.gz
+    sha256: cb90c06f2dbec971792af576d5b9a382fb3c4ca2b1deea55ea262b403f4e641e
 
 - name: libftdi
   buildsystem: cmake-ninja
   config-opts:
   - -DLIB_SUFFIX=
+  - -Wno-dev
   sources:
   - type: archive
-    url: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-1.4.tar.bz2
-    sha256: ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74
+    url: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-1.5.tar.bz2
+    sha256: 7c7091e9c86196148bd41177b4590dccb1510bfe6cea5bf7407ff194482eb049
 
 - name: libdc
   sources:
   - type: archive
-    url: https://github.com/Subsurface-divelog/libdc/archive/v4.9.0.tar.gz
-    sha256: f8f29d52ebed24635e9cb7e5c3ad219b1b48cc2f5d213da13cf44fec4b89001d
+    url: https://github.com/subsurface/libdc/archive/v4.9.10.tar.gz
+    sha256: 2bf53c2fa23ae31ce6df803d9668a7db22cc699b7fac330d6b303547c93d65a6
   - type: shell
     commands:
     - autoreconf --install
@@ -176,8 +182,8 @@ modules:
   sources:
   - type: git # use git in order to make HandleVersionGeneration.cmake work
     url: https://github.com/Subsurface-divelog/subsurface
-    branch: v4.9.3
-    commit: 8ac48a96c75bae4fc9dbd5f0c434d6144a8b8502
+    branch: v4.9.10
+    commit: f4ef9565a7dca695812870a87e5c25a3605ac5bb
   - type: shell
     commands:
     - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|" -i core/qt-init.cpp
