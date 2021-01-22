@@ -31,19 +31,26 @@ cleanup:
 - "*.la"
 - "*.cmake"
 modules:
+- shared-modules/libusb/libusb.json
 
 - name: libical
-  cleanup:
-  - /lib/cmake
   buildsystem: cmake-ninja
   config-opts:
-  - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  - -DCMAKE_INSTALL_LIBDIR=/app/lib
-  - -DBUILD_SHARED_LIBS=ON
+    - "-DCMAKE_INSTALL_LIBDIR=lib"
+    - "-DBUILD_SHARED_LIBS:BOOL=ON"
+    - "-DICAL_GLIB=true"
+    - "-DGOBJECT_INTROSPECTION=true"
+    - "-DICAL_GLIB_VAPI=true"
+    - "-DICAL_BUILD_DOCS=false"
+    - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    - -DICAL_GLIB_VAPI=False
+    # - -DCMAKE_INSTALL_LIBDIR=/app/lib
   sources:
   - type: archive
     url: https://github.com/libical/libical/archive/v3.0.9.tar.gz
     sha256: bd26d98b7fcb2eb0cd5461747bbb02024ebe38e293ca53a7dfdcb2505265a728
+  cleanup:
+    - /lib/cmake
 
 - name: libssh2
   buildsystem: cmake
@@ -85,12 +92,17 @@ modules:
 
 - name: bluez
   config-opts:
-  - --disable-datafiles
-  - --disable-systemd
-  - --disable-udev
-  - --enable-library
-  - --prefix=/app
-  - --sysconfdir=/app/etc
+  - "--disable-datafiles"
+  - "--disable-systemd"
+  - "--enable-experimental"
+  - "--enable-library"
+  - "--disable-client"
+  - "--disable-mesh"
+  - "--disable-tools"
+  - "--disable-monitor"
+  - "--disable-udev"
+  - "--prefix=/app"
+  - "--sysconfdir=/app/etc"
   sources:
   - type: archive
     url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
@@ -128,17 +140,11 @@ modules:
     make -j $FLATPAK_BUILDER_N_JOBS &&
     make install
 
-- name: libusb # build dependency of libftdi
-  sources:
-  - type: archive
-    url: https://github.com/libusb/libusb/archive/v1.0.24.tar.gz
-    sha256: b7724c272dfc5713dce88ff717efd60f021ca5b7c8e30f08ebb2c42d2eea08ae
-
 - name: hidapi
   sources:
   - type: archive
-    url: https://github.com/signal11/hidapi/archive/hidapi-0.8.0-rc1.tar.gz
-    sha256: 3c147200bf48a04c1e927cd81589c5ddceff61e6dac137a605f6ac9793f4af61
+    url: https://github.com/libusb/hidapi/archive/hidapi-0.10.1.tar.gz
+    sha256: f71dd8a1f46979c17ee521bc2117573872bbf040f8a4750e492271fc141f2644
 
 - name: libconfuse # build dependency of libftdi
   sources:
