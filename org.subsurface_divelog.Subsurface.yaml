@@ -138,7 +138,12 @@ modules:
   - /bin
   - /mkspecs
   sources:
-  - type: git # build fails when using the archive
+    # When using the archive instead of git, the build fails with the following error
+    # In file included from qlowenergycontroller.cpp:52:
+    # bluez/bluez5_helper_p.h:57:10: fatal error: QtBluetooth/private/qtbluetoothglobal_p.h: No such file or directory
+    #    57 | #include <QtBluetooth/private/qtbluetoothglobal_p.h>
+    #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  - type: git
     url: https://github.com/qt/qtconnectivity
     tag: v5.15.2
     commit: ca6cc606d9fc0947ea6c27738a1ca8f12f3258ea
