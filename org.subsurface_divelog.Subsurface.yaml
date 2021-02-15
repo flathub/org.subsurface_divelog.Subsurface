@@ -16,7 +16,7 @@ finish-args:
 - --device=all # required to talk to dive computers
 - --system-talk-name=org.bluez # required to talk to dive computers
 - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
-- --talk-name=com.canonical.AppMenu.Registrar # gives application access to dbus menu
+- --talk-name=com.canonical.AppMenu.Registrar # required for global menu
 cleanup:
 - /include
 - /lib/pkgconfig
@@ -229,7 +229,7 @@ modules:
   - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
   sources:
   - type: git # use git in order to make HandleVersionGeneration.cmake work
-    url: https://github.com/Subsurface-divelog/subsurface
+    url: https://github.com/subsurface/subsurface
     tag: v4.9.10
     commit: f4ef9565a7dca695812870a87e5c25a3605ac5bb
     x-checker-data:
