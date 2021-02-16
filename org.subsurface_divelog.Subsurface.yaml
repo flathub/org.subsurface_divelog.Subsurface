@@ -48,11 +48,9 @@ modules:
       type: anitya
       project-id: 1637
       url-template: https://github.com/libical/libical/archive/v$version.tar.gz
-  cleanup:
-    - /lib/cmake
 
 - name: libssh2
-  buildsystem: cmake
+  buildsystem: cmake-ninja
   config-opts:
   - -DCMAKE_BUILD_TYPE=RelWithDebInfo
   - -DCMAKE_C_FLAGS=-fPIC
@@ -175,7 +173,7 @@ modules:
   buildsystem: cmake-ninja
   config-opts:
   - -DLIB_SUFFIX=
-  - -Wno-dev
+  - -Wno-dev # suppress warning for project developers
   sources:
   - type: archive
     url: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-1.5.tar.bz2
