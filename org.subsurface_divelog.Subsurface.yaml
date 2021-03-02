@@ -218,3 +218,8 @@ modules:
             -i core/qt-init.cpp
           - sed -e "s|<id>subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
             -i appdata/subsurface.appdata.xml.in
+    # copied from
+    # https://github.com/texstudio-org/texstudio/blob/master/.github/workflows/ci.yml (setting QT_QPA_PLATFORM) and
+    # https://github.com/subsurface/subsurface/blob/master/README_TESTING.md
+    build-commands:
+    - cd tests && QT_QPA_PLATFORM=offscreen ctest # if tests fail, use -V option to get verbose output
