@@ -186,8 +186,8 @@ modules:
   - name: libdc
     sources:
       - type: archive
-        url: https://github.com/subsurface/libdc/archive/v4.9.10.tar.gz
-        sha256: 2bf53c2fa23ae31ce6df803d9668a7db22cc699b7fac330d6b303547c93d65a6
+        url: https://github.com/subsurface/libdc/archive/v5.0.0.tar.gz
+        sha256: efeaa74916cf4458672d56bea7025700610a279340401f71693b1c0a33873de7
         x-checker-data:
           type: anitya
           project-id: 153474
@@ -222,4 +222,4 @@ modules:
     # https://github.com/texstudio-org/texstudio/blob/master/.github/workflows/ci.yml (setting QT_QPA_PLATFORM) and
     # https://github.com/subsurface/subsurface/blob/master/README_TESTING.md
     build-commands:
-    - cd tests && QT_QPA_PLATFORM=offscreen ctest # if tests fail, use -V option to get verbose output
+      - cd tests && QT_QPA_PLATFORM=offscreen ctest # if tests fail, use -V option to get verbose output
