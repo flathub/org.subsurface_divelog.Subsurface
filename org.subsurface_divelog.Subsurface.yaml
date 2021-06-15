@@ -102,6 +102,9 @@ modules:
           project-id: 1627
           url-template: https://github.com/libgit2/libgit2/archive/v$version.tar.gz
 
+  # flatpak-pip-generator docutils
+  - python3-docutils.json
+  
   - name: bluez
     config-opts:
       - --disable-datafiles
