@@ -140,12 +140,13 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v6.2.0-alpha1
-        commit: e0fd0cc94129abfede00c9976f5f5102a4395fd4
+        tag: v5.15.2
+        commit: ca6cc606d9fc0947ea6c27738a1ca8f12f3258ea
         x-checker-data:
           type: anitya
           project-id: 153467
           tag-template: v$version
+          stable-only: true
     build-commands:
       - qmake
       - make -j $FLATPAK_BUILDER_N_JOBS
