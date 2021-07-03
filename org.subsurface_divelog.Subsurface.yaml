@@ -210,8 +210,8 @@ modules:
     sources:
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        tag: v5.0.1
-        commit: 56ffa95459b74e2f28c277d5b6d9b004ef26b240
+        tag: v5.0.2
+        commit: 827e3f8ecc176ab1abecfdba3874c010490d34f2
         x-checker-data:
           type: anitya
           project-id: 4903
