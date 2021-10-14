@@ -147,6 +147,9 @@ modules:
           project-id: 153467
           tag-template: v$version
           stable-only: true
+          versions:
+            <: "6"
+
     build-commands:
       - qmake
       - make -j $FLATPAK_BUILDER_N_JOBS
