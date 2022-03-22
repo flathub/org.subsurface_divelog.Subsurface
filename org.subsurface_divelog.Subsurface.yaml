@@ -193,8 +193,8 @@ modules:
   - name: libdc
     sources:
       - type: archive
-        url: https://github.com/subsurface/libdc/archive/v5.0.6.tar.gz
-        sha256: 0f6fbf9cdf2860dcb6ec634faef2a6a3eba92358d9012e2ed854ed8011dd73f4
+        url: https://github.com/subsurface/libdc/archive/v5.0.7.tar.gz
+        sha256: 01e6c8a16269ce88c48c6bbeb34dbb7f917c764fafb7eb3688ff750b74713f5a
         x-checker-data:
           type: anitya
           project-id: 153474
