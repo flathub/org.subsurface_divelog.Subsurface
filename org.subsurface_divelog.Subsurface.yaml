@@ -69,8 +69,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/nih-at/libzip/archive/v1.9.1.tar.gz
-        sha256: 506cadc6a992b28279be1e4b4e6590be6225c9c199fb53d8204cfea9c21db7b6
+        url: https://github.com/nih-at/libzip/archive/v1.9.2.tar.gz
+        sha256: 7f28eaec7a02ca099ea9dad88fc8023f7f6ddfca54b780040ff7fdb39d9efb3c
         x-checker-data:
           type: anitya
           project-id: 10649
