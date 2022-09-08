@@ -140,8 +140,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.5-lts-lgpl
-        commit: 15f809f2a7f555c2bdb8ac152bd187e313a2838c
+        tag: v5.15.6-lts-lgpl
+        commit: 41cd6185fff015f492820ec8d6be99690e562791
         x-checker-data:
           type: anitya
           project-id: 153467
