@@ -42,8 +42,8 @@ modules:
       - -DICAL_GLIB_VAPI=False
     sources:
       - type: archive
-        url: https://github.com/libical/libical/archive/v3.0.14.tar.gz
-        sha256: 4284b780356f1dc6a01f16083e7b836e63d3815e27ed0eaaad684712357ccc8f
+        url: https://github.com/libical/libical/archive/v3.0.15.tar.gz
+        sha256: 019085ba99936f25546d86cb3e34852e5fe2b5a7d5f1cb4423a0cc42e399f629
         x-checker-data:
           type: anitya
           project-id: 1637
@@ -214,8 +214,8 @@ modules:
     sources:
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        tag: v5.0.9
-        commit: 8a9359a03c9e4f0b63e91696a67acd9f133ad328
+        tag: v5.0.10
+        commit: cca21cf07f21839722028aa26ec23af49a4f7720
         x-checker-data:
           type: anitya
           project-id: 4903
