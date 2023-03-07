@@ -1,9 +1,9 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: '5.15-22.08'
+runtime-version: 5.15-22.08
 base: io.qt.qtwebkit.BaseApp
-base-version: '5.15-22.08'
+base-version: 5.15-22.08
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
@@ -95,8 +95,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.5.1.tar.gz
-        sha256: 7074f1e2697992b82402501182db254fe62d64877b12f6e4c64656516f4cde88
+        url: https://github.com/libgit2/libgit2/archive/v1.6.2.tar.gz
+        sha256: d557fbf35557bb5df53cbf38ae0081edb4a36494ec0d19741fa673e509245f8f
         x-checker-data:
           type: anitya
           project-id: 1627
