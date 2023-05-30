@@ -56,8 +56,8 @@ modules:
       - -DCMAKE_C_FLAGS=-fPIC
     sources:
       - type: archive
-        url: https://github.com/libssh2/libssh2/archive/libssh2-1.10.0.tar.gz
-        sha256: 31469ccfc71a5247c926e3f0938e122cbb7a7a4a1bdf1cf2d3121f78b558d261
+        url: https://github.com/libssh2/libssh2/archive/libssh2-1.11.0.tar.gz
+        sha256: a842b6778b32d99e3ec83f8d7d1ac449853e41892f3c09bc3d7017e8e246b1cd
         x-checker-data:
           type: anitya
           project-id: 1730
