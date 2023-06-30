@@ -78,6 +78,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DGRANTLEE_BUILD_WITH_QT6=TRUE
     sources:
       - type: archive
         url: https://github.com/steveire/grantlee/archive/v5.3.1.tar.gz
