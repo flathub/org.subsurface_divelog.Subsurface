@@ -127,7 +127,7 @@ modules:
           url-template: http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
 
   - name: qtconnectivity
-    buildsystem: simple
+    buildsystem: cmake-ninja
     cleanup-platform:
       - /bin
       - /mkspecs
@@ -150,9 +150,6 @@ modules:
             <: '6'
 
     build-commands:
-      - qmake
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - cp -r -n {bin,include,lib} /app
       - mkdir -p /app/src/bluetooth
       - cp -r src/bluetooth /app/src/ # header files required by subsurface
 
