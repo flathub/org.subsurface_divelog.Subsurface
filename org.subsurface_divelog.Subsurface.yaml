@@ -139,7 +139,7 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: V6.5.1
+        tag: v6.5.1
         commit: 662abed3ac1217a901c2636d86e13c91432ed1c6
         x-checker-data:
           type: anitya
