@@ -67,8 +67,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/nih-at/libzip/archive/v1.10.0.tar.gz
-        sha256: 01f7272bb18965a9d59b9e5de7b390e04da8b6eb5bd7514e6fa32ae8dfe9df54
+        url: https://github.com/nih-at/libzip/archive/v1.10.1.tar.gz
+        sha256: d56d857d1c3ad4a7f3a4c01a51c6a6e5530e35ab93503f62276e8ba2b306186a
         x-checker-data:
           type: anitya
           project-id: 10649
@@ -94,8 +94,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.6.4.tar.gz
-        sha256: d25866a4ee275a64f65be2d9a663680a5cf1ed87b7ee4c534997562c828e500d
+        url: https://github.com/libgit2/libgit2/archive/v1.7.1.tar.gz
+        sha256: 17d2b292f21be3892b704dddff29327b3564f96099a1c53b00edc23160c71327
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -119,8 +119,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
-        sha256: 39fea64b590c9492984a0c27a89fc203e1cdc74866086efb8f4698677ab2b574
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
+        sha256: fc505e6445cb579a55cacee6821fe70d633921522043d322b696de0a175ff933
         x-checker-data:
           type: anitya
           project-id: 10029
