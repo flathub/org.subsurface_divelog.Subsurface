@@ -153,16 +153,6 @@ modules:
       - mkdir -p /app/src/bluetooth
       - cp -r src/bluetooth /app/src/ # header files required by subsurface
 
-  - name: googlemaps
-    buildsystem: qmake
-    sources:
-      - type: git
-        url: https://github.com/subsurface/googlemaps
-        commit: 7ce7124b385b2ebac0f72c38b094f436d4fe5c58
-      - type: shell
-        commands:
-          - sed -i "s|\$\$\[QT_INSTALL_PLUGINS\]|/app/lib/plugins|" googlemaps.pro
-
   - name: libconfuse # build dependency of libftdi
     sources:
       - type: archive
