@@ -212,14 +212,12 @@ modules:
       - -DFTDISUPPORT=ON
       - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
     sources:
+      # Subsurface has switched to a rolling release
+      # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        tag: v5.0.10
-        commit: cca21cf07f21839722028aa26ec23af49a4f7720
-        x-checker-data:
-          type: anitya
-          project-id: 4903
-          tag-template: v$version
+        tag: latest
+        commit: cec60d324bec89ea766af1fda16887cb18acbdc8
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
