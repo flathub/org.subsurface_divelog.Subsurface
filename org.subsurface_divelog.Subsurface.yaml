@@ -193,13 +193,9 @@ modules:
 
   - name: libdc
     sources:
-      - type: archive
-        url: https://github.com/subsurface/libdc/archive/v5.0.10.tar.gz
-        sha256: f9512ed4747f52138a7c7942fee677e33a16d99aa5db4aafe377ef7cd8276567
-        x-checker-data:
-          type: anitya
-          project-id: 153474
-          url-template: https://github.com/subsurface/libdc/archive/v$version.tar.gz
+      - type: git
+        url: https://github.com/subsurface/libdc
+        commit: 577b6940874c76cfc9b1adb0b0e51e26349b5a8f
       - type: shell
         commands:
           - autoreconf --install
