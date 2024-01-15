@@ -191,7 +191,8 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
-      - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+      #- -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+      - -DBUILD_WITH_QT6=ON
     sources:
       # Subsurface has switched to a rolling release
       # https://subsurface.github.io/en/release/2023/12/release-changes/
