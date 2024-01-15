@@ -1,9 +1,7 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: 5.15-22.08
-base: io.qt.qtwebkit.BaseApp
-base-version: 5.15-22.08
+runtime-version: 6.6
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
@@ -80,6 +78,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DGRANTLEE_BUILD_WITH_QT6=TRUE
     sources:
       - type: archive
         url: https://github.com/steveire/grantlee/archive/v5.3.1.tar.gz
@@ -128,7 +127,7 @@ modules:
           url-template: http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
 
   - name: qtconnectivity
-    buildsystem: simple
+    buildsystem: cmake-ninja
     cleanup-platform:
       - /bin
       - /mkspecs
@@ -140,32 +139,18 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.12-lts-lgpl
-        commit: 45604bedf6d3b022fc9758eeb4cefab0f9f2dea5
+        tag: v6.6.1
+        commit: 02626fe90cdd19f64b773a7ab5c276b0d3fef0d3
         x-checker-data:
           type: anitya
           project-id: 153467
           tag-template: v$version
           stable-only: true
           versions:
-            <: '6'
-
+            <: '6.7'
     build-commands:
-      - qmake
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - cp -r -n {bin,include,lib} /app
       - mkdir -p /app/src/bluetooth
       - cp -r src/bluetooth /app/src/ # header files required by subsurface
-
-  - name: googlemaps
-    buildsystem: qmake
-    sources:
-      - type: git
-        url: https://github.com/subsurface/googlemaps
-        commit: 7ce7124b385b2ebac0f72c38b094f436d4fe5c58
-      - type: shell
-        commands:
-          - sed -i "s|\$\$\[QT_INSTALL_PLUGINS\]|/app/lib/plugins|" googlemaps.pro
 
   - name: libconfuse # build dependency of libftdi
     sources:
@@ -206,7 +191,8 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
-      - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+      #- -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+      - -DBUILD_WITH_QT6=ON
     sources:
       # Subsurface has switched to a rolling release
       # https://subsurface.github.io/en/release/2023/12/release-changes/
