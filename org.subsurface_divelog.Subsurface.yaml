@@ -139,16 +139,15 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v6.5.1
-        commit: 662abed3ac1217a901c2636d86e13c91432ed1c6
+        tag: v6.6.1
+        commit: 02626fe90cdd19f64b773a7ab5c276b0d3fef0d3
         x-checker-data:
           type: anitya
           project-id: 153467
           tag-template: v$version
           stable-only: true
           versions:
-            <: '6'
-
+            <: '6.7'
     build-commands:
       - mkdir -p /app/src/bluetooth
       - cp -r src/bluetooth /app/src/ # header files required by subsurface
