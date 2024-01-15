@@ -40,8 +40,8 @@ modules:
       - -DICAL_GLIB_VAPI=False
     sources:
       - type: archive
-        url: https://github.com/libical/libical/archive/v3.0.16.tar.gz
-        sha256: b44705dd71ca4538c86fb16248483ab4b48978524fb1da5097bd76aa2e0f0c33
+        url: https://github.com/libical/libical/archive/v3.0.17.tar.gz
+        sha256: bcda9a6db6870240328752854d1ea475af9bbc6356e6771018200e475e5f781b
         x-checker-data:
           type: anitya
           project-id: 1637
@@ -119,8 +119,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
-        sha256: fc505e6445cb579a55cacee6821fe70d633921522043d322b696de0a175ff933
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
+        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
         x-checker-data:
           type: anitya
           project-id: 10029
@@ -179,13 +179,9 @@ modules:
 
   - name: libdc
     sources:
-      - type: archive
-        url: https://github.com/subsurface/libdc/archive/v5.0.10.tar.gz
-        sha256: f9512ed4747f52138a7c7942fee677e33a16d99aa5db4aafe377ef7cd8276567
-        x-checker-data:
-          type: anitya
-          project-id: 153474
-          url-template: https://github.com/subsurface/libdc/archive/v$version.tar.gz
+      - type: git
+        url: https://github.com/subsurface/libdc
+        commit: 577b6940874c76cfc9b1adb0b0e51e26349b5a8f
       - type: shell
         commands:
           - autoreconf --install
@@ -198,19 +194,17 @@ modules:
       - -DFTDISUPPORT=ON
       - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
     sources:
+      # Subsurface has switched to a rolling release
+      # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        tag: v5.0.10
-        commit: cca21cf07f21839722028aa26ec23af49a4f7720
-        x-checker-data:
-          type: anitya
-          project-id: 4903
-          tag-template: v$version
+        tag: latest
+        commit: cec60d324bec89ea766af1fda16887cb18acbdc8
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
-          - sed -e "s|<id>subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
+          - sed -e "s|<id>org.subsurface_divelog.subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
             -i appdata/subsurface.appdata.xml.in
     # copied from
     # https://github.com/texstudio-org/texstudio/blob/master/.github/workflows/ci.yml (setting QT_QPA_PLATFORM) and
