@@ -1,7 +1,7 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: 6.5
+runtime-version: 6.6
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.appdata.xml
