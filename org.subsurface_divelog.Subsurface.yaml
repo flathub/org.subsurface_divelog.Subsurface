@@ -191,6 +191,20 @@ modules:
           project-id: 14622
           url-template: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-$version.tar.bz2
 
+  - name: libdc
+    sources:
+      - type: git
+        url: https://github.com/subsurface/libdc
+        commit: 577b6940874c76cfc9b1adb0b0e51e26349b5a8f
+        x-checker-data:
+          - type: json
+          - url: https://api.github.com/repos/subsurface/subsurface/git/trees/${parent}
+          - commit-query: ".tree[] | select(.path == "libdivecomputer") | .sha"
+          - parent-id: subsurface
+      - type: shell
+        commands:
+          - autoreconf --install
+          
   - name: subsurface
     buildsystem: cmake
     builddir: true
@@ -205,6 +219,9 @@ modules:
         url: https://github.com/subsurface/subsurface
         branch: master
         commit: 704b26ff1ed27258f09424baf1c3f3fe78cd66f3
+        x-checker-data:
+          - type: dummy
+          - source-id: subsurface
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
