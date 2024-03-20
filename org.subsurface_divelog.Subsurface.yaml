@@ -95,8 +95,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.7.1.tar.gz
-        sha256: 17d2b292f21be3892b704dddff29327b3564f96099a1c53b00edc23160c71327
+        url: https://github.com/libgit2/libgit2/archive/v1.8.0.tar.gz
+        sha256: 9e1d6a880d59026b675456fbb1593c724c68d73c34c0d214d6eb848e9bbd8ae4
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -120,8 +120,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.73.tar.xz
+        sha256: 257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53
         x-checker-data:
           type: anitya
           project-id: 10029
@@ -140,8 +140,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.12-lts-lgpl
-        commit: 45604bedf6d3b022fc9758eeb4cefab0f9f2dea5
+        tag: v5.15.13-lts-lgpl
+        commit: f1fed9fb2a7e5b877d8408f92040651b0cf47dbb
         x-checker-data:
           type: anitya
           project-id: 153467
