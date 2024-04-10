@@ -42,8 +42,8 @@ modules:
       - -DICAL_GLIB_VAPI=False
     sources:
       - type: archive
-        url: https://github.com/libical/libical/archive/v3.0.17.tar.gz
-        sha256: bcda9a6db6870240328752854d1ea475af9bbc6356e6771018200e475e5f781b
+        url: https://github.com/libical/libical/archive/v3.0.18.tar.gz
+        sha256: 72b7dc1a5937533aee5a2baefc990983b66b141dd80d43b51f80aced4aae219c
         x-checker-data:
           type: anitya
           project-id: 1637
@@ -120,8 +120,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.73.tar.xz
+        sha256: 257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53
         x-checker-data:
           type: anitya
           project-id: 10029
@@ -140,8 +140,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.12-lts-lgpl
-        commit: 45604bedf6d3b022fc9758eeb4cefab0f9f2dea5
+        tag: v5.15.13-lts-lgpl
+        commit: f1fed9fb2a7e5b877d8408f92040651b0cf47dbb
         x-checker-data:
           type: anitya
           project-id: 153467
