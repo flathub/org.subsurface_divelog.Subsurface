@@ -6,7 +6,7 @@ base: io.qt.qtwebkit.BaseApp
 base-version: 5.15-23.08
 command: subsurface
 rename-icon: subsurface-icon
-rename-appdata-file: subsurface.appdata.xml
+rename-appdata-file: subsurface.metainfo.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
   - --socket=wayland
@@ -33,7 +33,7 @@ modules:
   - name: libical
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_SHARED_LIBS:BOOL=ON
       - -DICAL_GLIB=true
       - -DGOBJECT_INTROSPECTION=true
@@ -195,7 +195,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/subsurface/libdc
-        commit: 577b6940874c76cfc9b1adb0b0e51e26349b5a8f
+        commit: 5d321deb8ac1dc85850947619d0b8b183a0837e8
       - type: shell
         commands:
           - autoreconf --install
@@ -212,14 +212,13 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        tag: latest
-        commit: cec60d324bec89ea766af1fda16887cb18acbdc8
+        commit: 245f8002a8466b5270e1d8865cf0b1096cff7390
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
           - sed -e "s|<id>org.subsurface_divelog.subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
-            -i appdata/subsurface.appdata.xml.in
+            -i metainfo/subsurface.metainfo.xml.in
     # copied from
     # https://github.com/texstudio-org/texstudio/blob/master/.github/workflows/ci.yml (setting QT_QPA_PLATFORM) and
     # https://github.com/subsurface/subsurface/blob/master/README_TESTING.md
