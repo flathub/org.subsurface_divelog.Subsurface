@@ -206,6 +206,9 @@ modules:
         commit: 245f8002a8466b5270e1d8865cf0b1096cff7390
       - type: shell
         commands:
+         - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app && make && make install
+      - type: shell
+        commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
           - sed -e "s|<id>org.subsurface_divelog.subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
