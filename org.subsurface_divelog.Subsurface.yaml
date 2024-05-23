@@ -203,8 +203,12 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        branch: master
         commit: 245f8002a8466b5270e1d8865cf0b1096cff7390
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/subsurface/subsurface/branches/master
+          commit-query: .commit.sha
+          timestamp-query: .commit.commit.committer.date
       - type: shell
         commands:
          - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app && make && make install
