@@ -120,8 +120,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.76.tar.xz
+        sha256: 55e2c645909ad82d833c42ce85ec20434e0ef0070941b1eab73facdd240bbd63
         x-checker-data:
           type: anitya
           project-id: 10029
@@ -203,7 +203,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 245f8002a8466b5270e1d8865cf0b1096cff7390
+        commit: 6bdfee080dbf7d321e35158b4fd1a2d6fe5f367e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
@@ -211,7 +211,8 @@ modules:
           timestamp-query: .commit.commit.committer.date
       - type: shell
         commands:
-         - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app && make && make install
+          - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app
+            && make && make install
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
