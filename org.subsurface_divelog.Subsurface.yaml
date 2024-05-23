@@ -191,15 +191,6 @@ modules:
           project-id: 14622
           url-template: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-$version.tar.bz2
 
-  - name: libdc
-    sources:
-      - type: git
-        url: https://github.com/subsurface/libdc
-        commit: 5d321deb8ac1dc85850947619d0b8b183a0837e8
-      - type: shell
-        commands:
-          - autoreconf --install
-
   - name: subsurface
     buildsystem: cmake
     builddir: true
