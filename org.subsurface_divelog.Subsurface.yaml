@@ -120,8 +120,8 @@ modules:
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.76.tar.xz
+        sha256: 55e2c645909ad82d833c42ce85ec20434e0ef0070941b1eab73facdd240bbd63
         x-checker-data:
           type: anitya
           project-id: 10029
@@ -140,8 +140,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.13-lts-lgpl
-        commit: f1fed9fb2a7e5b877d8408f92040651b0cf47dbb
+        tag: v5.15.14-lts-lgpl
+        commit: e7db26441bd92d8e4aed9fa63f1cea7fd7ec2aec
         x-checker-data:
           type: anitya
           project-id: 153467
@@ -203,7 +203,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 6bdfee080dbf7d321e35158b4fd1a2d6fe5f367e
+        commit: 8c14fb971c5a4213d488e4f0df6faafbb6236545
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
