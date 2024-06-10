@@ -204,7 +204,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 10fc3bfd47443b409aca7abd482bc60b74cbc9ee
+        commit: b126fccb1b38ca94e33c092d9758add8a89fcb29
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
