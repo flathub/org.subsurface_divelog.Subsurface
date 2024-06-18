@@ -1,3 +1,4 @@
+#
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
