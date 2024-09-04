@@ -141,8 +141,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.14-lts-lgpl
-        commit: e7db26441bd92d8e4aed9fa63f1cea7fd7ec2aec
+        tag: v5.15.15-lts-lgpl
+        commit: b1f82067f25242332bb9c9beabdf445bde2be203
         x-checker-data:
           type: anitya
           project-id: 153467
@@ -204,7 +204,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: cc55c442a34f7c735df26c2dceac02ed81663424
+        commit: f5857262835be44c80f0a8500f3764f09dc22d94
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
