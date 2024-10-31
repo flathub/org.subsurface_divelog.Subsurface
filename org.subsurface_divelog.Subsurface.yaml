@@ -95,8 +95,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.8.2.tar.gz
-        sha256: 184699f0d9773f96eeeb5cb245ba2304400f5b74671f313240410f594c566a28
+        url: https://github.com/libgit2/libgit2/archive/v1.8.4.tar.gz
+        sha256: 49d0fc50ab931816f6bfc1ac68f8d74b760450eebdb5374e803ee36550f26774
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -204,7 +204,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 077f07815113d29882f623d45410ef3bf517d1b8
+        commit: 534bf68639e5b6653696bd1d107cbb95e17c1728
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
