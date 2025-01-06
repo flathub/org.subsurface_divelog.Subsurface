@@ -116,17 +116,17 @@ modules:
       - --disable-tools
       - --disable-monitor
       - --disable-udev
+      - --disable-cups
       - --prefix=/app
       - --sysconfdir=/app/etc
     sources:
       - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
-        # temporarily disabled, since newer versions can't be buiilt without CUPS support
-        #x-checker-data:
-        #  type: anitya
-        #  project-id: 10029
-        #  url-template: http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
+        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.79.tar.xz
+        sha256: 4164a5303a9f71c70f48c03ff60be34231b568d93a9ad5e79928d34e6aa0ea8a 
+        x-checker-data:
+          type: anitya
+          project-id: 10029
+          url-template: http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
 
   - name: qtconnectivity
     buildsystem: simple
