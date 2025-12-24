@@ -42,8 +42,8 @@ modules:
       - -DICAL_GLIB_VAPI=False
     sources:
       - type: archive
-        url: https://github.com/libical/libical/archive/v3.0.19.tar.gz
-        sha256: 6a1e7f0f50a399cbad826bcc286ce10d7151f3df7cc103f641de15160523c73f
+        url: https://github.com/libical/libical/archive/v3.0.20.tar.gz
+        sha256: e73de92f5a6ce84c1b00306446b290a2b08cdf0a80988eca0a2c9d5c3510b4c2
         x-checker-data:
           type: anitya
           project-id: 1637
@@ -69,8 +69,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/nih-at/libzip/archive/v1.11.2.tar.gz
-        sha256: 447dbc1d0e8c319d1e0abc34521d23bec483349c4be0b1cab0e17ef5cf6a4e82
+        url: https://github.com/nih-at/libzip/archive/v1.11.4.tar.gz
+        sha256: 4844595615e2436e3cf1ed46a1b260fbdaf8b8fa8f2b594e8b5d8162c696b8b2
         x-checker-data:
           type: anitya
           project-id: 10649
@@ -95,8 +95,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.9.0.tar.gz
-        sha256: 75b27d4d6df44bd34e2f70663cfd998f5ec41e680e1e593238bbe517a84c7ed2
+        url: https://github.com/libgit2/libgit2/archive/v1.9.2.tar.gz
+        sha256: 6f097c82fc06ece4f40539fb17e9d41baf1a5a2fc26b1b8562d21b89bc355fe6
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -141,8 +141,8 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.16-lts-lgpl
-        commit: b242dc4fd4bd68809872d8c1d6c1e63825692893
+        tag: v5.15.18-lts-lgpl
+        commit: 5b2159be824888876953e263204039e89f59c4c1
         x-checker-data:
           type: anitya
           project-id: 153467
@@ -204,7 +204,7 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 2af18dfa3665e154bd7a1011422f40b4d3cc6f0a
+        commit: db0d3b44d0303883e8d9212bbc99f6fdaabaa92f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/subsurface/subsurface/branches/master
