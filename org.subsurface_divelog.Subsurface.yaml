@@ -205,11 +205,6 @@ modules:
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
         commit: 8d16c84be38f00882f32877e51a88205bc23448a
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/subsurface/subsurface/branches/master
-          commit-query: .commit.sha
-          timestamp-query: .commit.commit.committer.date
       - type: shell
         commands:
           - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app
