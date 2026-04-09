@@ -30,7 +30,6 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
-  - shared-modules/libusb/libusb.json
 
   - name: libssh2
     buildsystem: cmake-ninja
@@ -166,6 +165,10 @@ modules:
   - name: subsurface
     buildsystem: cmake
     builddir: true
+    build-options:
+      env:
+        CANONICALVERSION: 6.0.5581
+        CANONICALVERSION_4: 6.0.5581.0
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
