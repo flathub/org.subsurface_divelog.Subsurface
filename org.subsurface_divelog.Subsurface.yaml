@@ -1,9 +1,7 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: "5.15"
-base: io.qt.qtwebkit.BaseApp
-base-version: "5.15"
+runtime-version: "6.10"
 command: subsurface
 rename-appdata-file: subsurface.metainfo.xml
 rename-desktop-file: subsurface.desktop
@@ -74,37 +72,6 @@ modules:
   # flatpak-pip-generator docutils
   - python3-docutils.json
 
-
-  - name: qtconnectivity
-    buildsystem: simple
-    cleanup-platform:
-      - /bin
-      - /mkspecs
-    sources:
-    # When using the archive instead of git, the build fails with the following error
-    # In file included from qlowenergycontroller.cpp:52:
-    # bluez/bluez5_helper_p.h:57:10: fatal error: QtBluetooth/private/qtbluetoothglobal_p.h: No such file or directory
-    #    57 | #include <QtBluetooth/private/qtbluetoothglobal_p.h>
-    #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      - type: git
-        url: https://github.com/qt/qtconnectivity
-        tag: v5.15.18-lts-lgpl
-        commit: 5b2159be824888876953e263204039e89f59c4c1
-        x-checker-data:
-          type: anitya
-          project-id: 153467
-          tag-template: v$version
-          stable-only: true
-          versions:
-            <: 6
-
-    build-commands:
-      - qmake
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - cp -r -n {bin,include,lib} /app
-      - mkdir -p /app/src/bluetooth
-      - cp -r src/bluetooth /app/src/ # header files required by subsurface
-
   - name: googlemaps
     buildsystem: qmake
     sources:
@@ -151,7 +118,6 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
       - -DNO_USERMANUAL=ON
-      - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
       - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DBUILD_TESTS=ON
     sources:
