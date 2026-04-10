@@ -17,8 +17,6 @@ finish-args:
   - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
   - --filesystem=~/.subsurface # read and write configuration and default logbook location
   - --talk-name=com.canonical.AppMenu.Registrar # required for global menu
-cleanup-commands:
-  - /app/cleanup-BaseApp.sh
 cleanup:
   - /include
   - /lib/pkgconfig
