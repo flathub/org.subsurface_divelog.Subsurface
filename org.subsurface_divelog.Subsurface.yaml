@@ -115,6 +115,7 @@ modules:
         CANONICALVERSION: 6.0.5581
         CANONICALVERSION_4: 6.0.5581.0
     config-opts:
+      - -DBUILD_WITH_QT6=ON
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
       - -DNO_USERMANUAL=ON
