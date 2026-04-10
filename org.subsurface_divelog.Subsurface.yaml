@@ -10,6 +10,7 @@ rename-desktop-file: subsurface.desktop
 finish-args:
   - --socket=wayland
   - --socket=fallback-x11
+  - --socket=cups
   - --share=ipc
   - --share=network
   - --allow=bluetooth
