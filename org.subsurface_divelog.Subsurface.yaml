@@ -202,10 +202,6 @@ modules:
           - scripts/get-version.sh --no-fetch 1 > latest-subsurface-buildnumber.tmp
             && mv latest-subsurface-buildnumber.tmp latest-subsurface-buildnumber
           - echo "CICD-release" > latest-subsurface-buildnumber-extension
-          - "{ scripts/get-version.sh --no-fetch 3; printf '-'; cat latest-subsurface-buildnumber-extension; } > .gitversion"
-          - git log -1 --format="%at" | xargs -I{} date -d @{} +%Y-%m-%d > .gitdate
-          # Remove tags so that add-version-to-metainfo.sh falls back to .gitversion instead of 'git describe'
-          - git tag -l | xargs -r git tag -d
           - rm -rf nightly-builds
     # Tests are mandatory for this package update. Exclude the one network-dependent test because Flatpak builds run with network isolation.
     build-commands:
