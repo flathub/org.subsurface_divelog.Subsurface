@@ -153,6 +153,7 @@ modules:
           - rm -rf nightly-builds
           - sed -e "s|subsurface-icon|org.subsurface_divelog.Subsurface|"
             -i subsurface.desktop
+          - echo "$CANONICALVERSION" > .gitversion
     # Tests are mandatory for this package update. Exclude the one network-dependent test because Flatpak builds run with network isolation.
     build-commands:
       - QT_QPA_PLATFORM=offscreen ctest --output-on-failure -E '^TestParsePerformance$'
