@@ -204,8 +204,11 @@ modules:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
           - scripts/get-version.sh --no-fetch 4 > .gitversion
-          # Leave the build number for version.cmake's calls to get-version.sh during the build
-          - scripts/get-version.sh --no-fetch 1 > latest-subsurface-buildnumber
+          # Leave the build number for version.cmake's calls to get-version.sh during the build.
+          # Write to a temp file first because '>' truncates the target before the script runs,
+          # and get-version.sh checks for 'latest-subsurface-buildnumber' as an input file.
+          - scripts/get-version.sh --no-fetch 1 > latest-subsurface-buildnumber.tmp
+            && mv latest-subsurface-buildnumber.tmp latest-subsurface-buildnumber
           - git log -1 --format="%at" | xargs -I{} date -d @{} +%Y-%m-%d > .gitdate
           # Remove tags so that add-version-to-metainfo.sh falls back to .gitversion instead of 'git describe'
           - git tag -l | xargs -r git tag -d
