@@ -1,9 +1,9 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: 5.15-25.08
+runtime-version: "5.15"
 base: io.qt.qtwebkit.BaseApp
-base-version: 5.15-25.08
+base-version: "5.15"
 command: subsurface
 rename-icon: subsurface-icon
 rename-appdata-file: subsurface.metainfo.xml
@@ -30,6 +30,8 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
+  - shared-modules/libusb/libusb.json
+
   - name: libssh2
     buildsystem: cmake-ninja
     config-opts:
@@ -56,19 +58,6 @@ modules:
           type: anitya
           project-id: 10649
           url-template: https://github.com/nih-at/libzip/archive/v$version.tar.gz
-
-  - name: grantlee
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/steveire/grantlee/archive/v5.3.1.tar.gz
-        sha256: ba288ae9ed37ec0c3622ceb40ae1f7e1e6b2ea89216ad8587f0863d64be24f06
-        x-checker-data:
-          type: anitya
-          project-id: 21448
-          url-template: https://github.com/steveire/grantlee/archive/v$version.tar.gz
 
   - name: libgit2
     buildsystem: cmake-ninja
@@ -187,7 +176,12 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
+<<<<<<< Updated upstream
         commit: 548a20f714e414aa8bba154d1fb02ae0f3bf79c3
+=======
+        commit: 112b31cb2a87a40d4c3b5b3b12f9a95b0e0b8a3a
+        disable-shallow-clone: true
+>>>>>>> Stashed changes
       # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
       # provide it as a source so it is fetched before network access is disabled for the build
       - type: git
