@@ -187,12 +187,13 @@ modules:
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 7fc7148822c9a58d4a9e3ea91f080b7b099cb936
+        commit: 548a20f714e414aa8bba154d1fb02ae0f3bf79c3
       # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
       # provide it as a source so it is fetched before network access is disabled for the build
       - type: git
         url: https://github.com/subsurface/nightly-builds
         commit: 7b0b3e8324b57ac76bbbde6e6f227415593036b1
+        disable-shallow-clone: true
         dest: nightly-builds
       - type: shell
         commands:
