@@ -13,9 +13,11 @@ finish-args:
   - --socket=fallback-x11
   - --share=ipc
   - --share=network
+  - --allow=bluetooth
   - --device=all # required to talk to dive computers
   - --system-talk-name=org.bluez # required to talk to dive computers
   - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
+  - --filesystem=~/.subsurface # read and write configuration and default logbook location
   - --talk-name=com.canonical.AppMenu.Registrar # required for global menu
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
@@ -173,9 +175,6 @@ modules:
   - name: subsurface
     buildsystem: cmake
     builddir: true
-    build-options:
-      env:
-        CANONICALVERSION: 6.0.5581
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
@@ -189,6 +188,12 @@ modules:
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
         commit: 33edd0237b2724857a9ab20f59560a59e8cc8db1
+      # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
+      # provide it as a source so it is fetched before network access is disabled for the build
+      - type: git
+        url: https://github.com/subsurface/nightly-builds
+        commit: 48fb3ce6f1893ce5aa7d33eb79d270f368f7db2d
+        dest: nightly-builds
       - type: shell
         commands:
           - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app
@@ -197,6 +202,11 @@ modules:
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
+          # Place the build number file where get-version.sh expects it (checked before any network access)
+          - cp nightly-builds/latest-subsurface-buildnumber .
+          - scripts/get-version.sh 4 > .gitversion
+          - git log -1 --format="%at" | xargs -I{} date -d @{} +%Y-%m-%d > .gitdate
+          - rm -rf nightly-builds
     # Tests are mandatory for this package update. Exclude the one network-dependent test because Flatpak builds run with network isolation.
     build-commands:
       - cd /run/build/subsurface/_flatpak_build && QT_QPA_PLATFORM=offscreen ctest --output-on-failure -E '^TestParsePerformance$'
