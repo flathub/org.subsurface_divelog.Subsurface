@@ -1,21 +1,23 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: "5.15"
 base: io.qt.qtwebkit.BaseApp
-base-version: 5.15-23.08
+base-version: "5.15"
 command: subsurface
-rename-icon: subsurface-icon
 rename-appdata-file: subsurface.metainfo.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
   - --socket=wayland
   - --socket=fallback-x11
+  - --socket=cups
   - --share=ipc
   - --share=network
+  - --allow=bluetooth
   - --device=all # required to talk to dive computers
   - --system-talk-name=org.bluez # required to talk to dive computers
   - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
+  - --filesystem=~/.subsurface # read and write configuration and default logbook location
   - --talk-name=com.canonical.AppMenu.Registrar # required for global menu
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
@@ -29,25 +31,6 @@ cleanup:
   - '*.la'
 modules:
   - shared-modules/libusb/libusb.json
-
-  - name: libical
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DBUILD_SHARED_LIBS:BOOL=ON
-      - -DICAL_GLIB=true
-      - -DGOBJECT_INTROSPECTION=true
-      - -DICAL_GLIB_VAPI=true
-      - -DICAL_BUILD_DOCS=false
-      - -DICAL_GLIB_VAPI=False
-    sources:
-      - type: archive
-        url: https://github.com/libical/libical/archive/v3.0.19.tar.gz
-        sha256: 6a1e7f0f50a399cbad826bcc286ce10d7151f3df7cc103f641de15160523c73f
-        x-checker-data:
-          type: anitya
-          project-id: 1637
-          url-template: https://github.com/libical/libical/archive/v$version.tar.gz
 
   - name: libssh2
     buildsystem: cmake-ninja
@@ -69,25 +52,12 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/nih-at/libzip/archive/v1.11.2.tar.gz
-        sha256: 447dbc1d0e8c319d1e0abc34521d23bec483349c4be0b1cab0e17ef5cf6a4e82
+        url: https://github.com/nih-at/libzip/archive/v1.11.4.tar.gz
+        sha256: 4844595615e2436e3cf1ed46a1b260fbdaf8b8fa8f2b594e8b5d8162c696b8b2
         x-checker-data:
           type: anitya
           project-id: 10649
           url-template: https://github.com/nih-at/libzip/archive/v$version.tar.gz
-
-  - name: grantlee
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/steveire/grantlee/archive/v5.3.1.tar.gz
-        sha256: ba288ae9ed37ec0c3622ceb40ae1f7e1e6b2ea89216ad8587f0863d64be24f06
-        x-checker-data:
-          type: anitya
-          project-id: 21448
-          url-template: https://github.com/steveire/grantlee/archive/v$version.tar.gz
 
   - name: libgit2
     buildsystem: cmake-ninja
@@ -95,8 +65,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libgit2/libgit2/archive/v1.9.0.tar.gz
-        sha256: 75b27d4d6df44bd34e2f70663cfd998f5ec41e680e1e593238bbe517a84c7ed2
+        url: https://github.com/libgit2/libgit2/archive/v1.9.2.tar.gz
+        sha256: 6f097c82fc06ece4f40539fb17e9d41baf1a5a2fc26b1b8562d21b89bc355fe6
         x-checker-data:
           type: anitya
           project-id: 1627
@@ -141,15 +111,13 @@ modules:
     #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       - type: git
         url: https://github.com/qt/qtconnectivity
-        tag: v5.15.16-lts-lgpl
-        commit: b242dc4fd4bd68809872d8c1d6c1e63825692893
+        tag: v5.15.18-lts-lgpl
+        commit: 5b2159be824888876953e263204039e89f59c4c1
         x-checker-data:
           type: anitya
           project-id: 153467
           tag-template: v$version
           stable-only: true
-          versions:
-            <: '6'
 
     build-commands:
       - qmake
@@ -183,6 +151,7 @@ modules:
     config-opts:
       - -DLIB_SUFFIX=
       - -Wno-dev # suppress warning for project developers
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: archive
         url: https://www.intra2net.com/en/developer/libftdi/download/libftdi1-1.5.tar.bz2
@@ -198,25 +167,44 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
+      - -DNO_USERMANUAL=ON
       - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+      - -DBUILD_TESTS=ON
     sources:
       # Subsurface has switched to a rolling release
       # https://subsurface.github.io/en/release/2023/12/release-changes/
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 2af18dfa3665e154bd7a1011422f40b4d3cc6f0a
+        commit: 99f7978e51a4c826ae0673e35ee4abd8725f41e7
+        disable-shallow-clone: true
+      # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
+      # provide it as a source so it is fetched before network access is disabled for the build
+      - type: git
+        url: https://github.com/subsurface/nightly-builds
+        commit: 7b0b3e8324b57ac76bbbde6e6f227415593036b1
+        disable-shallow-clone: true
+        dest: nightly-builds
       - type: shell
         commands:
           - cd libdivecomputer && autoreconf --install && ./configure --prefix=/app
-            && make && make install
+            && make && mkdir -p /app/include && make install
       - type: shell
         commands:
           - sed -e "s|setDesktopFileName(\"subsurface\")|setDesktopFileName(\"org.subsurface_divelog.Subsurface\")|"
             -i core/qt-init.cpp
-          - sed -e "s|<id>org.subsurface_divelog.subsurface</id>|<id>org.subsurface_divelog.Subsurface</id>|"
-            -i metainfo/subsurface.metainfo.xml.in
-    # copied from
-    # https://github.com/texstudio-org/texstudio/blob/master/.github/workflows/ci.yml (setting QT_QPA_PLATFORM) and
-    # https://github.com/subsurface/subsurface/blob/master/README_TESTING.md
+          # Disable Git LFS hooks in nightly-builds; git-lfs is not available in the sandbox
+          # and the post-checkout hook would make 'git checkout' fail with exit code 2.
+          - rm -f nightly-builds/.git/hooks/post-checkout
+          # Leave the build number for version.cmake's calls to get-version.sh during the build.
+          # Write to a temp file first because '>' truncates the target before the script runs,
+          # and get-version.sh checks for 'latest-subsurface-buildnumber' as an input file.
+          - scripts/get-version.sh --no-fetch 1 > latest-subsurface-buildnumber.tmp
+            && mv latest-subsurface-buildnumber.tmp latest-subsurface-buildnumber
+          - echo "CICD-release" > latest-subsurface-buildnumber-extension
+          - rm -rf nightly-builds
+          - sed -e "s|subsurface-icon|org.subsurface_divelog.Subsurface|"
+            -i subsurface.desktop
+    # Tests are mandatory for this package update. Exclude the one network-dependent test because Flatpak builds run with network isolation.
     build-commands:
-      - cd tests && QT_QPA_PLATFORM=offscreen ctest # if tests fail, use -V option to get verbose output
+      - cd /run/build/subsurface/_flatpak_build && QT_QPA_PLATFORM=offscreen ctest --output-on-failure -E '^TestParsePerformance$'
