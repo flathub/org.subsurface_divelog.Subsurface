@@ -118,6 +118,8 @@ modules:
           project-id: 153467
           tag-template: v$version
           stable-only: true
+          versions:
+            <: 6
 
     build-commands:
       - qmake
@@ -207,4 +209,4 @@ modules:
             -i subsurface.desktop
     # Tests are mandatory for this package update. Exclude the one network-dependent test because Flatpak builds run with network isolation.
     build-commands:
-      - cd /run/build/subsurface/_flatpak_build && QT_QPA_PLATFORM=offscreen ctest --output-on-failure -E '^TestParsePerformance$'
+      - QT_QPA_PLATFORM=offscreen ctest --output-on-failure -E '^TestParsePerformance$'
