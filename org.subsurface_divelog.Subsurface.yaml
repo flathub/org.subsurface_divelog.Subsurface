@@ -8,14 +8,13 @@ rename-desktop-file: subsurface.desktop
 finish-args:
   - --socket=wayland
   - --socket=fallback-x11
-  - --socket=cups
   - --share=ipc
   - --share=network
   - --allow=bluetooth
   - --device=all # required to talk to dive computers
   - --system-talk-name=org.bluez # required to talk to dive computers
   - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
-  - --filesystem=~/.subsurface # read and write configuration and default logbook location
+  - --persist=~/.subsurface # read and write configuration and default logbook location
   - --talk-name=com.canonical.AppMenu.Registrar # required for global menu
 cleanup:
   - /include
