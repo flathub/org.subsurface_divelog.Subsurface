@@ -114,12 +114,14 @@ modules:
       - -DNO_USERMANUAL=ON
       - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DBUILD_TESTS=ON
+      - -DFLATHUB_BUILD=ON
     sources:
       # Subsurface has switched to a rolling release
       # https://subsurface.github.io/en/release/2023/12/release-changes/
+      # for now we hardcode specific releases here
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 692c8a469e0e0c43583d7ab900988110c883cb6c
+        commit: d538b1f1982b2baec20fda1ece31895e2c364bfd
         disable-shallow-clone: true
       # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
       # provide it as a source so it is fetched before network access is disabled for the build
