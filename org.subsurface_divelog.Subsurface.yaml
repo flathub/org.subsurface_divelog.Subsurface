@@ -1,26 +1,21 @@
 app-id: org.subsurface_divelog.Subsurface
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
-runtime-version: "5.15"
-base: io.qt.qtwebkit.BaseApp
-base-version: "5.15"
+runtime-version: "6.10"
 command: subsurface
 rename-appdata-file: subsurface.metainfo.xml
 rename-desktop-file: subsurface.desktop
 finish-args:
   - --socket=wayland
   - --socket=fallback-x11
-  - --socket=cups
   - --share=ipc
   - --share=network
   - --allow=bluetooth
   - --device=all # required to talk to dive computers
   - --system-talk-name=org.bluez # required to talk to dive computers
   - --filesystem=xdg-config/kdeglobals:ro # gives application access to kdeglobals
-  - --filesystem=~/.subsurface # read and write configuration and default logbook location
+  - --persist=~/.subsurface # read and write configuration and default logbook location
   - --talk-name=com.canonical.AppMenu.Registrar # required for global menu
-cleanup-commands:
-  - /app/cleanup-BaseApp.sh
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -30,7 +25,6 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
-  - shared-modules/libusb/libusb.json
 
   - name: libssh2
     buildsystem: cmake-ninja
@@ -75,65 +69,12 @@ modules:
   # flatpak-pip-generator docutils
   - python3-docutils.json
 
-  - name: bluez
-    config-opts:
-      - --disable-datafiles
-      - --disable-systemd
-      - --enable-experimental
-      - --enable-library
-      - --disable-client
-      - --disable-mesh
-      - --disable-tools
-      - --disable-monitor
-      - --disable-udev
-      - --prefix=/app
-      - --sysconfdir=/app/etc
-    sources:
-      - type: archive
-        url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.72.tar.xz
-        sha256: 499d7fa345a996c1bb650f5c6749e1d929111fa6ece0be0e98687fee6124536e
-        # temporarily disabled, since newer versions can't be buiilt without CUPS support
-        #x-checker-data:
-        #  type: anitya
-        #  project-id: 10029
-        #  url-template: http://www.kernel.org/pub/linux/bluetooth/bluez-$version.tar.xz
-
-  - name: qtconnectivity
-    buildsystem: simple
-    cleanup-platform:
-      - /bin
-      - /mkspecs
-    sources:
-    # When using the archive instead of git, the build fails with the following error
-    # In file included from qlowenergycontroller.cpp:52:
-    # bluez/bluez5_helper_p.h:57:10: fatal error: QtBluetooth/private/qtbluetoothglobal_p.h: No such file or directory
-    #    57 | #include <QtBluetooth/private/qtbluetoothglobal_p.h>
-    #       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      - type: git
-        url: https://github.com/qt/qtconnectivity
-        tag: v5.15.18-lts-lgpl
-        commit: 5b2159be824888876953e263204039e89f59c4c1
-        x-checker-data:
-          type: anitya
-          project-id: 153467
-          tag-template: v$version
-          stable-only: true
-          versions:
-            <: 6
-
-    build-commands:
-      - qmake
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - cp -r -n {bin,include,lib} /app
-      - mkdir -p /app/src/bluetooth
-      - cp -r src/bluetooth /app/src/ # header files required by subsurface
-
   - name: googlemaps
     buildsystem: qmake
     sources:
       - type: git
         url: https://github.com/subsurface/googlemaps
-        commit: 7ce7124b385b2ebac0f72c38b094f436d4fe5c58
+        commit: fdad408ce0d99b48af80ee9510bc46b5676ca782
       - type: shell
         commands:
           - sed -i "s|\$\$\[QT_INSTALL_PLUGINS\]|/app/lib/plugins|" googlemaps.pro
@@ -167,18 +108,20 @@ modules:
     buildsystem: cmake
     builddir: true
     config-opts:
+      - -DBUILD_WITH_QT6=ON
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DFTDISUPPORT=ON
       - -DNO_USERMANUAL=ON
-      - -DQt5WebKitWidgets_DIR=/app/lib/cmake/Qt5WebKitWidgets
       - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DBUILD_TESTS=ON
+      - -DFLATHUB_BUILD=ON
     sources:
       # Subsurface has switched to a rolling release
       # https://subsurface.github.io/en/release/2023/12/release-changes/
+      # for now we hardcode specific releases here
       - type: git # use git in order to make HandleVersionGeneration.cmake work
         url: https://github.com/subsurface/subsurface
-        commit: 99f7978e51a4c826ae0673e35ee4abd8725f41e7
+        commit: 51ddeaa15ec887d251797b4e088889eec7c421d4
         disable-shallow-clone: true
       # get-version.sh requires the nightly-builds repo to look up the build number for the current commit;
       # provide it as a source so it is fetched before network access is disabled for the build
