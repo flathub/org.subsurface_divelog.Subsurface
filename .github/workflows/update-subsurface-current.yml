@@ -19,71 +19,36 @@ jobs:
     if: github.repository_owner == 'flathub'
     runs-on: ubuntu-24.04
     steps:
-      - name: Resolve the compatible source commits
-        id: commits
-        run: |
-          set -eu
-
-          git init --quiet subsurface
-          git -C subsurface remote add origin \
-            https://github.com/subsurface/subsurface.git
-          git -C subsurface fetch --no-tags --filter=blob:none origin \
-            refs/heads/current
-          resolved_subsurface_sha=$(git -C subsurface rev-parse FETCH_HEAD^{commit})
-
-          git clone --filter=blob:none --no-checkout \
-            https://github.com/subsurface/nightly-builds.git nightly-builds
-          git -C nightly-builds fetch --no-tags --depth=1 origin \
-            '+refs/heads/branch-for-*:refs/remotes/origin/branch-for-*'
-
-          nightly_ref=$(git -C nightly-builds for-each-ref --sort=-committerdate \
-            --format='%(refname:short)' 'refs/remotes/origin/branch-for-*' \
-            | while IFS= read -r ref; do
-                source_sha=${ref#origin/branch-for-}
-                if ! printf '%s\n' "$source_sha" | grep -Eq '^[0-9a-f]{40}$'; then
-                  continue
-                fi
-                if git -C subsurface merge-base --is-ancestor "$source_sha" "$resolved_subsurface_sha"; then
-                  printf '%s\n' "$ref"
-                  break
-                fi
-              done)
-
-          if [ -z "$nightly_ref" ]; then
-            echo "No nightly-builds branch is compatible with $resolved_subsurface_sha." >&2
-            exit 1
-          fi
-
-          nightly_sha=$(git -C nightly-builds rev-parse "$nightly_ref^{commit}")
-          printf 'subsurface_sha=%s\n' "$resolved_subsurface_sha" >> "$GITHUB_OUTPUT"
-          printf 'nightly_sha=%s\n' "$nightly_sha" >> "$GITHUB_OUTPUT"
-
       - name: Clone the manifest repository
         run: git clone "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" manifest
 
-      - name: Update only the source pins
-        env:
-          SUBSURFACE_SHA: ${{ steps.commits.outputs.subsurface_sha }}
-          NIGHTLY_SHA: ${{ steps.commits.outputs.nightly_sha }}
+      # Only the Subsurface commit is pinned by this workflow. The build clones
+      # nightly-builds in full and selects the matching build number itself, so
+      # that pin is deliberately left alone.
+      - name: Update the Subsurface source pin
         run: |
           set -eu
 
-          python3 - <<'PY'
+          subsurface_sha=$(git ls-remote \
+            https://github.com/subsurface/subsurface.git refs/heads/current \
+            | cut -f1)
+          if ! printf '%s\n' "$subsurface_sha" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "Could not resolve the Subsurface current branch." >&2
+            exit 1
+          fi
+
+          SUBSURFACE_SHA=$subsurface_sha python3 - <<'PY'
           import os
           import re
           from pathlib import Path
 
           path = Path("manifest/org.subsurface_divelog.Subsurface.yaml")
           text = path.read_text()
-          replacements = (
-              ("https://github.com/subsurface/subsurface", os.environ["SUBSURFACE_SHA"]),
-              ("https://github.com/subsurface/nightly-builds", os.environ["NIGHTLY_SHA"]),
-          )
-          for url, commit in replacements:
-              pattern = rf"(url: {re.escape(url)}\n\s*commit: )[0-9a-f]{{40}}"
-              text, count = re.subn(pattern, rf"\g<1>{commit}", text)
-              if count != 1:
-                  raise SystemExit(f"Expected exactly one pin for {url}, found {count}")
+          url = "https://github.com/subsurface/subsurface"
+          pattern = rf"(url: {re.escape(url)}\n\s*commit: )[0-9a-f]{{40}}"
+          text, count = re.subn(pattern, rf"\g<1>{os.environ['SUBSURFACE_SHA']}", text)
+          if count != 1:
+              raise SystemExit(f"Expected exactly one pin for {url}, found {count}")
           path.write_text(text)
           PY
 
@@ -98,4 +63,4 @@ jobs:
           commit-message: 'Update Subsurface current'
           title: 'Update Subsurface current'
           body: |
-            Update the Subsurface and matching nightly-builds source pins.
+            Update the Subsurface source pin to the current branch head.
