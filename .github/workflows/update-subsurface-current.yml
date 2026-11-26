@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Clone the manifest repository
-        run: git clone --depth=1 "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" manifest
+        run: git clone "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" manifest
 
       # Only the Subsurface commit is pinned by this workflow. The build clones
       # nightly-builds in full and selects the matching build number itself, so
