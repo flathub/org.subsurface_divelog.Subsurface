@@ -59,7 +59,7 @@ jobs:
           printf 'nightly_sha=%s\n' "$nightly_sha" >> "$GITHUB_OUTPUT"
 
       - name: Clone the manifest repository
-        run: git clone --depth=1 "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" manifest
+        run: git clone "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" manifest
 
       - name: Update only the source pins
         env:
